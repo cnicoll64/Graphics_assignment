@@ -1,0 +1,6 @@
+
+#ignored files:
+/.vs/*
+.sln
+.vcxproj
+.vcxproj.filters

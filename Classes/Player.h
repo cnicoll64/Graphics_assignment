@@ -12,7 +12,7 @@ class Player
 {
 protected:
 	color playerColor;
-	BlokusShape pieces[21];
+	BlokusShape* pieces = new BlokusShape; //allows default constructor
 
 public:
 	Player();

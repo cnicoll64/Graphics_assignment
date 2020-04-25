@@ -41,7 +41,7 @@ bool BlokusShape::setType(shape newType)
 bool BlokusShape::rotate(bool direction)
 {
 
-
+	return false; //allows building
 }
 
 bool BlokusShape::setStatus(bool newStatus)

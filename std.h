@@ -11,4 +11,8 @@ using namespace std;
 
 #include "Classes/menu.h"
 
+//constant Macro declairation for window size
+#define Window_Width 1366
+#define Window_Height  768
+
 #endif

@@ -4,11 +4,10 @@
 
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <string.h>
+#include "std.h"
+
 
 using namespace std;
-
 
 
 
@@ -20,6 +19,14 @@ class menu
 public:
 	//constructor for start menu
 	menu();
+	int chooseGame();
+	void printRules();
+
+private:
+
+	sf::RenderWindow *window;
+	sf::Sprite GameLogo, Rules, One_One, Three_s, Four_s;
+	sf::RectangleShape* menu_background;
 
 };
 

@@ -20,10 +20,13 @@ public:
 	//constructor for start menu
 	menu();
 	int chooseGame();
+	void refresh();
 	void printRules();
 
 private:
 
+	bool highlightTexture(sf::Sprite &input);
+	sf::Texture GameHeader, GameRules, PVP, Three, Four;
 	sf::RenderWindow *window;
 	sf::Sprite GameLogo, Rules, One_One, Three_s, Four_s;
 	sf::RectangleShape* menu_background;

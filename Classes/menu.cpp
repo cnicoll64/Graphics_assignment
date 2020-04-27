@@ -7,8 +7,6 @@ menu::menu() {
 	window = new sf::RenderWindow (sf::VideoMode(Window_Width,Window_Height), "Blokus", sf::Style::Default);
 	(*window).setIcon(gimp_image.width, gimp_image.height, gimp_image.pixel_data);
 
-	sf::Texture GameHeader, GameRules, PVP, Three, Four;
-
 	//loads Game images from project directory
 	if (!GameHeader.loadFromFile("GameImage.png"));
 
@@ -78,25 +76,11 @@ menu::menu() {
 
 	//draws window
 
-	(*window).clear(sf::Color::Color(214, 214, 214, 255));
-
-
-	(*window).draw(GameLogo);
-
-	(*window).draw(*menu_background);
-
-	(*window).draw(Rules);
-
-	(*window).draw(One_One);
-
-	(*window).draw(Three_s);
-
-	(*window).draw(Four_s);
-
-
-	(*window).display();
+	refresh();
 
 }
+
+
 
 //allows the user to choose what game option they want
 int menu::chooseGame()
@@ -113,16 +97,89 @@ int menu::chooseGame()
 				(*window).close();
 			}
 
+			if (highlightTexture(Rules)) {
+				
+				if (event.mouseButton.button == sf::Mouse::Left){
+					
+					//branch to rules menue
+
+				}
+			}
+
+			if (highlightTexture(One_One)) {
+
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					window->clear();
+					window->close();
+					return 2;
+				}
+			}
+
+			if (highlightTexture(Three_s)) {
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					window->clear();
+					window->close();
+					return 3;
+				}
+			}
+
+			if (highlightTexture(Four_s)) {
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					window->clear();
+					window->close();
+					return 4;
+				}
+			}
+
+
+			refresh();
 		}
 
-		//add user polling here
+		
 		
 	}
+}
+
+void menu::refresh()
+{
+
+	(*window).clear(sf::Color::Color(214, 214, 214, 255));
+
+	(*window).draw(GameLogo);
+
+	(*window).draw(*menu_background);
+
+	(*window).draw(Rules);
+
+	(*window).draw(One_One);
+
+	(*window).draw(Three_s);
+
+	(*window).draw(Four_s);
 
 
-	return 0;
+	(*window).display();
 }
 
 void menu::printRules()
 {
+}
+
+//returns 1 or 0: if user mouse is over game menu option, then it highlights that option and returns 1 else returns 0
+bool menu::highlightTexture(sf::Sprite& input)
+{
+
+	if ((sf::Mouse::getPosition(*window).x >= input.getPosition().x && sf::Mouse::getPosition(*window).x <= (input.getGlobalBounds().width + input.getPosition().x))
+		&& (sf::Mouse::getPosition(*window).y >= input.getPosition().y && sf::Mouse::getPosition(*window).y <= (input.getPosition().y + input.getGlobalBounds().height))) {
+
+		input.setColor(sf::Color(255, 255, 255, 200));
+
+		return 1;
+	}
+	else {
+		input.setColor(sf::Color(255, 255, 255, 255));
+
+		return 0;
+	}
+
 }

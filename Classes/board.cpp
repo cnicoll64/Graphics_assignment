@@ -2,16 +2,16 @@
 
 bool Board::fillTile(int x, int y, Player p)
 {
-	game[x][y].setOccupied;
-	game[x][y].setPlayerColor(p.getColor);
+	game[x][y].setOccupied();
+	game[x][y].setPlayerColor(p.getColor());
 	return true;
 }
 
-bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are placed first at their center. if there is no clear center, it will
+bool Board::placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are placed first at their center. if there is no clear center, it will
 {															 // be top left of center
-	if (p.hasPiece)
+	if (p.hasPiece(s))
 	{
-		switch (s)
+		switch (s) // Each case contains an algorithm for placing each of the 21 shapes 
 		{
 		case One:
 			fillTile(xCenter, yCenter, p);
@@ -20,7 +20,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			
 		case Two:
 			fillTile(xCenter, yCenter, p);
-			switch (p.pieces[1].getOrientation())
+			switch (p.getShape(1).getOrientation()) 
 			{
 			case North:
 				fillTile(xCenter + 1, yCenter, p);
@@ -43,7 +43,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			
 		case ThreeL:
 			fillTile(xCenter, yCenter, p);
-				switch (p.pieces[2].getOrientation())
+				switch (p.getShape(2).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter + 1, p);
@@ -70,7 +70,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			
 		case ThreeLine:
 			fillTile(xCenter, yCenter, p);
-				switch (p.pieces[3].getOrientation())
+				switch (p.getShape(3).getOrientation())
 				{
 				case North:
 					fillTile(xCenter + 1, yCenter, p);
@@ -97,7 +97,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			
 		case Cube:
 			fillTile(xCenter, yCenter, p);
-				switch (p.pieces[4].getOrientation())
+				switch (p.getShape(4).getOrientation())
 				{
 				case North:
 					fillTile(xCenter + 1, yCenter, p);
@@ -128,7 +128,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			
 		case FourT:
 			fillTile(xCenter, yCenter, p);
-				switch (p.pieces[5].getOrientation())
+				switch (p.getShape(5).getOrientation())
 				{
 				case North:
 					fillTile(xCenter + 1, yCenter, p);
@@ -159,7 +159,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 
 		case FourLine:
 			fillTile(xCenter, yCenter, p);
-				switch (p.pieces[6].getOrientation())
+				switch (p.getShape(6).getOrientation())
 				{
 				case North:
 					fillTile(xCenter - 1, yCenter, p);
@@ -192,7 +192,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			fillTile(xCenter, yCenter, p);
 			if (!p.getShape(7).isFlipped())
 			{
-				switch (p.pieces[7].getOrientation())
+				switch (p.getShape(7).getOrientation())
 				{
 				case North:
 					fillTile(xCenter - 1, yCenter, p);
@@ -221,7 +221,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			}
 			else
 			{
-				switch (p.pieces[8].getOrientation())
+				switch (p.getShape(7).getOrientation())
 				{
 				case North:
 					fillTile(xCenter + 1, yCenter, p);
@@ -255,7 +255,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			fillTile(xCenter, yCenter, p);
 			if (!p.getShape(8).isFlipped())
 			{
-				switch (p.pieces[8].getOrientation())
+				switch (p.getShape(8).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter - 1, p);
@@ -284,7 +284,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			}
 			else
 			{
-				switch (p.pieces[8].getOrientation())
+				switch (p.getShape(8).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter + 1, p);
@@ -318,7 +318,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			fillTile(xCenter, yCenter, p);
 			if (!p.getShape(9).isFlipped())
 			{
-				switch (p.pieces[9].getOrientation())
+				switch (p.getShape(9).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter - 1, p);
@@ -351,7 +351,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			}
 			else
 			{
-				switch (p.pieces[9].getOrientation())
+				switch (p.getShape(9).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter - 1, p);
@@ -387,7 +387,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			
 		case FiveT:
 			fillTile(xCenter, yCenter, p);
-				switch (p.pieces[10].getOrientation())
+				switch (p.getShape(10).getOrientation())
 				{
 				case North:
 					fillTile(xCenter + 1, yCenter, p);
@@ -422,7 +422,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			
 		case FiveEvenL:
 			fillTile(xCenter, yCenter, p);
-				switch (p.pieces[11].getOrientation())
+				switch (p.getShape(11).getOrientation())
 				{
 				case North:
 					fillTile(xCenter + 1, yCenter, p);
@@ -459,7 +459,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			fillTile(xCenter, yCenter, p);
 			if (!p.getShape(12).isFlipped())
 			{
-				switch (p.pieces[12].getOrientation())
+				switch (p.getShape(12).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter + 1, p);
@@ -492,7 +492,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			}
 			else
 			{
-				switch (p.pieces[12].getOrientation())
+				switch (p.getShape(12).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter + 1, p);
@@ -530,7 +530,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			fillTile(xCenter, yCenter, p);
 			if (!p.getShape(13).isFlipped())
 			{
-				switch (p.pieces[13].getOrientation())
+				switch (p.getShape(13).getOrientation())
 				{
 				case North:
 					fillTile(xCenter + 1, yCenter, p);
@@ -563,7 +563,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			}
 			else
 			{
-				switch (p.pieces[13].getOrientation())
+				switch (p.getShape(13).getOrientation())
 				{
 				case North:
 					fillTile(xCenter + 1, yCenter, p);
@@ -599,7 +599,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			
 		case FiveLine:
 			fillTile(xCenter, yCenter, p);
-				switch (p.pieces[14].getOrientation())
+				switch (p.getShape(14).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter + 1, p);
@@ -636,7 +636,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			fillTile(xCenter, yCenter, p);
 			if (!p.getShape(15).isFlipped())
 			{
-				switch (p.pieces[15].getOrientation())
+				switch (p.getShape(15).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter - 1, p);
@@ -669,7 +669,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			}
 			else
 			{
-				switch (p.pieces[15].getOrientation())
+				switch (p.getShape(15).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter - 1, p);
@@ -705,7 +705,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			
 		case FiveSnake:
 			fillTile(xCenter, yCenter, p);
-				switch (p.pieces[16].getOrientation())
+				switch (p.getShape(16).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter - 1, p);
@@ -740,7 +740,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			
 		case FiveC:
 			fillTile(xCenter, yCenter, p);
-				switch (p.pieces[17].getOrientation())
+				switch (p.getShape(17).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter + 1, p);
@@ -777,7 +777,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			fillTile(xCenter, yCenter, p);
 			if (!p.getShape(18).isFlipped())
 			{
-				switch (p.pieces[18].getOrientation())
+				switch (p.getShape(18).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter + 1, p);
@@ -810,7 +810,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			}
 			else
 			{
-				switch (p.pieces[18].getOrientation())
+				switch (p.getShape(18).getOrientation())
 				{
 				case North:
 					fillTile(xCenter, yCenter + 1 , p);
@@ -857,7 +857,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			fillTile(xCenter, yCenter, p);
 			if (!p.getShape(20).isFlipped())
 			{
-				switch (p.pieces[20].getOrientation())
+				switch (p.getShape(20).getOrientation())
 				{
 				case North:
 					fillTile(xCenter - 1, yCenter, p);
@@ -890,7 +890,7 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			}
 			else
 			{
-				switch (p.pieces[20].getOrientation())
+				switch (p.getShape(20).getOrientation())
 				{
 				case North:
 					fillTile(xCenter + 1, yCenter, p);
@@ -925,26 +925,26 @@ bool placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are place
 			break;
 		}
 	}
-	return false;
+	return true;
 }
 
-bool validate(Player p, shape s);
+bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 {
 	return false;
 }
-int redTiles();
+int Board::redTiles()
 {
 	return 0;
 }
-int blueTiles();
+int Board::blueTiles()
 {
 	return 0;
 }
-int greenTiles();
+int Board::greenTiles()
 {
 	return 0;
 }
-int yellowTiles();
+int Board::yellowTiles()
 {
 	return 0;
 }

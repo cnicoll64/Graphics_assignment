@@ -4,20 +4,18 @@
 #include "std.h"
 #include "BlokusShape.h"
 
-using namespace std;
-
 enum color { Red, Blue, Green, Yellow };
 
 class Player
 {
 protected:
 	color playerColor;
-	BlokusShape* pieces = new BlokusShape; //allows default constructor
+	BlokusShape pieces[21];
 
 public:
-	Player();
+	Player(color newPlayerColor);
 	color getColor();
-	bool setColor(color newColor);
+	BlokusShape getShape(int shapeNum);
 	bool hasPiece(shape type);
 	bool discardPiece(shape type);
 };

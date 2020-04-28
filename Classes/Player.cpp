@@ -1,9 +1,8 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player(color newPlayerColor)
 {
-
-
+	playerColor = newPlayerColor;
 }
 
 color Player::getColor()
@@ -11,25 +10,40 @@ color Player::getColor()
 	return playerColor;
 }
 
-bool Player::setColor(color newColor)
+BlokusShape Player::getShape(int shapeNum)
 {
-	playerColor = newColor;
-	return true;
+	return pieces[shapeNum];
 }
-
 
 bool Player::hasPiece(shape type)
 {
-
-	return false; //allows building
+	for (int index = 0; index < 21; ++index)
+	{
+		if (pieces[index].getTypeInt() == (int)type)
+		{
+			if (pieces[index].getStatus())
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 
 }
 
 bool Player::discardPiece(shape type)
 {
+	if (hasPiece(type))
+	{
+		for (int index = 0; index < 21; ++index)
+		{
+			if (pieces[index].getTypeInt() == (int)type)
+			{
+				pieces[index].placed();
+				return true;
+			}
+		}
+	}
 
-
-	return false; //allows building
-
+	return false;
 }
-

@@ -7,7 +7,7 @@ menu::menu() {
 	window = new sf::RenderWindow (sf::VideoMode(Window_Width,Window_Height), "Blokus", sf::Style::Default);
 	(*window).setIcon(gimp_image.width, gimp_image.height, gimp_image.pixel_data);
 
-	//loads Game images from project directory
+	//loads Game images from project directory- if reasources can't be loaded check if all files from assets folder are in project directory
 	if (!GameHeader.loadFromFile("GameImage.png"));
 
 	if (!GameRules.loadFromFile("GameRules.png"));
@@ -17,6 +17,10 @@ menu::menu() {
 	if (!Three.loadFromFile("ThreePlayer.png"));
 
 	if (!Four.loadFromFile("FourPlayers.png"));
+
+	if (!font.loadFromFile("Righteous-Regular.ttf"));
+
+	if (!returned.loadFromFile("Return.png"));
 
 	GameHeader.setSmooth(true);
 	GameHeader.setRepeated(false);
@@ -39,6 +43,9 @@ menu::menu() {
 	One_One.setTexture(PVP);
 	Three_s.setTexture(Three);
 	Four_s.setTexture(Four);
+	Title.setFont(font);
+	body.setFont(font);
+	returned_s.setTexture(returned);
 
 	menu_background = new sf::RectangleShape(sf::Vector2f(Rules.getGlobalBounds().width + 20, (Rules.getGlobalBounds().height + 10) * 4 + 10));
 	(*menu_background).setFillColor(sf::Color(31, 19, 0, 250));
@@ -89,26 +96,18 @@ int menu::chooseGame()
 	//for now, later place in user input section
 	while ((*window).isOpen()) {
 
-		sf::Event event;
+		sf::Event *event = new sf::Event;
 
-		while ((*window).pollEvent(event)) {
+		while ((*window).pollEvent(*event)) {
 
-			if (event.type == sf::Event::Closed) {
+			if (event->type == sf::Event::Closed) {
 				(*window).close();
-			}
-
-			if (highlightTexture(Rules)) {
-				
-				if (event.mouseButton.button == sf::Mouse::Left){
-					
-					//branch to rules menue
-
-				}
+				return 0;
 			}
 
 			if (highlightTexture(One_One)) {
 
-				if (event.mouseButton.button == sf::Mouse::Left) {
+				if (event->mouseButton.button == sf::Mouse::Left && event->type == sf::Event::MouseButtonPressed) {
 					window->clear();
 					window->close();
 					return 2;
@@ -116,7 +115,7 @@ int menu::chooseGame()
 			}
 
 			if (highlightTexture(Three_s)) {
-				if (event.mouseButton.button == sf::Mouse::Left) {
+				if (event->mouseButton.button == sf::Mouse::Left && event->type == sf::Event::MouseButtonPressed) {
 					window->clear();
 					window->close();
 					return 3;
@@ -124,19 +123,26 @@ int menu::chooseGame()
 			}
 
 			if (highlightTexture(Four_s)) {
-				if (event.mouseButton.button == sf::Mouse::Left) {
+				if (event->mouseButton.button == sf::Mouse::Left && event->type == sf::Event::MouseButtonPressed) {
 					window->clear();
 					window->close();
 					return 4;
 				}
 			}
 
+			if (highlightTexture(Rules)) {
+
+				if (event->mouseButton.button == sf::Mouse::Left && event->type == sf::Event::MouseButtonPressed) {
+
+					//branch to rules menue
+					printRules();
+
+				}
+			}
+
 
 			refresh();
-		}
-
-		
-		
+		}	
 	}
 }
 
@@ -157,12 +163,53 @@ void menu::refresh()
 
 	(*window).draw(Four_s);
 
-
 	(*window).display();
 }
 
 void menu::printRules()
 {
+	bool flag = true;
+	Title.setString("How to Play Blokus");
+	Title.setCharacterSize(40);
+	Title.setFillColor(sf::Color::Black);
+	Title.setStyle(sf::Text::Underlined);
+
+	Title.setPosition(sf::Vector2f( (Window_Width - Title.getGlobalBounds().width) / 2, 25));
+
+	body.setString("Blokus is a two player game that involes squares with different colors.");
+	body.setCharacterSize(20);
+	body.setFillColor(sf::Color::Black);
+
+	body.setPosition(sf::Vector2f((Window_Width - body.getGlobalBounds().width) / 2, 100));
+	returned_s.setPosition(sf::Vector2f((Window_Width - returned_s.getGlobalBounds().width) / 2, 600));
+
+	while ((*window).isOpen() && flag) {
+
+		sf::Event event;
+		
+
+		while ((*window).pollEvent(event) && flag) {
+
+			if (event.type == sf::Event::Closed) {
+				(*window).close();
+			}
+
+			if (highlightTexture(returned_s)) {
+				if (event.mouseButton.button == sf::Mouse::Left) {
+
+					flag = false;
+					
+				}
+			}
+
+			(*window).clear(sf::Color::Color(214, 214, 214, 255));
+
+			window->draw(Title);
+			window->draw(body);
+			window->draw(returned_s);
+			window->display();
+		}
+	}
 }
 
 //returns 1 or 0: if user mouse is over game menu option, then it highlights that option and returns 1 else returns 0

@@ -26,10 +26,13 @@ public:
 private:
 
 	bool highlightTexture(sf::Sprite &input);
-	sf::Texture GameHeader, GameRules, PVP, Three, Four;
+	sf::Texture GameHeader, GameRules, PVP, Three, Four, returned;
 	sf::RenderWindow *window;
-	sf::Sprite GameLogo, Rules, One_One, Three_s, Four_s;
+	sf::Sprite GameLogo, Rules, One_One, Three_s, Four_s, returned_s;
 	sf::RectangleShape* menu_background;
+	sf::Font font;
+	sf::Text Title;
+	sf::Text body;
 
 };
 

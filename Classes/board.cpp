@@ -7,34 +7,65 @@ bool Board::fillTile(int x, int y, Player p)
 	return true;
 }
 
+Tile Board::getGameTile(int x, int y)
+{
+	return game[y][x];
+}
+
+int Board::validCornerX(color c) // valid corner functions take a color and returns the x or y coordinate of the corner that color starts in
+{
+	if (c == Red || c == Green)
+	{
+		return 0;
+	}
+	if (c == Blue || c == Yellow)
+	{
+		return 19;
+	}
+	return -1;
+}
+
+int Board::validCornerY(color c)
+{
+	if (c == Red || c == Blue)
+	{
+		return 0;
+	}
+	if (c == Green || c == Yellow)
+	{
+		return 19;
+	}
+	return -1;
+}
+
 bool Board::placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are placed first at their center. if there is no clear center, it will
 {															 // be top left of center
 	if (p.hasPiece(s))
 	{
 		switch (s) // Each case contains an algorithm for placing each of the 21 shapes 
 		{
-		case One:
+		case One: // Shapes One and FiveCross are the only two shapes that have no different combinations when rotated or flipped 
 			fillTile(xCenter, yCenter, p);
 			p.discardPiece(One);
 			break;
 			
 		case Two:
-			fillTile(xCenter, yCenter, p);
+			fillTile(xCenter, yCenter, p); // fill in center for each shape
 			switch (p.getShape(1).getOrientation()) 
 			{
-			case North:
+			case North: // no rotations
 				fillTile(xCenter + 1, yCenter, p);
 				break;
 
-			case East:
+			case East: // one rotation clockwise
 				fillTile(xCenter, yCenter + 1, p);
 				break;
 
-			case South:
+			case South: // two rotations clockwise 
 				fillTile(xCenter - 1, yCenter, p);
 				break;
 
-			case West:
+			case West: // three rotations clockwise
 				fillTile(xCenter, yCenter - 1, p);
 				break;
 			}
@@ -190,7 +221,7 @@ bool Board::placePiece(int xCenter, int yCenter, Player p, shape s) // pieces ar
 
 		case FourL:
 			fillTile(xCenter, yCenter, p);
-			if (!p.getShape(7).isFlipped())
+			if (!p.getShape(7).isFlipped()) // checks if shape is not flipped
 			{
 				switch (p.getShape(7).getOrientation())
 				{
@@ -219,7 +250,7 @@ bool Board::placePiece(int xCenter, int yCenter, Player p, shape s) // pieces ar
 					break;
 				}
 			}
-			else
+			else // if shape is flippped
 			{
 				switch (p.getShape(7).getOrientation())
 				{
@@ -930,6 +961,181 @@ bool Board::placePiece(int xCenter, int yCenter, Player p, shape s) // pieces ar
 
 bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 {
+	/*
+		*Function must take in a cooordinate pair, a shape that is being placed, and a player who is placing the shape and return
+		 whether or not the coordinates for the center tile are a valid place to put the peice
+		*Center coordinate is defined the same way as in the placing function, where if there is no clear center to the shape, it is
+		 the tile to the top left of center
+
+		VALIDATION CRITERIA:
+		-None of the tiles under the shape can be occupied
+		-No tiles may be outside the 2D array
+		-There must be a tile of the player's color at the corner of one of the shapes
+		-There must not be any tiles of the players color touching any of the edges of the shape
+		
+		If all of these conditions are met, the function returns true
+		Also, if any shapes are placed at their starting corner and the conditions are fulfilled, then this is a valid placement
+
+		EXAMPLE:
+	*/
+	switch (s)
+	{
+	case ThreeL:
+
+		switch (p.getShape(2).getOrientation())
+		{
+		case North:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter + 1).isOccupied()) // check if spaces are occupied
+			{
+				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20)) //check if tiles go out of bounds
+				{
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) || 
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))) //check if piece is in a valid 
+					{																						  //corner
+						return true;
+					}
+
+					if (getGameTile(xCenter + 1, yCenter - 1).getPlayerColor == p.getColor() ||//check if corner is the right color
+						getGameTile(xCenter - 2, yCenter - 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter - 2, yCenter + 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter - 1, yCenter + 2).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter + 1, yCenter + 2).getPlayerColor == p.getColor())
+					{
+						if (getGameTile(xCenter - 2, yCenter).getPlayerColor != p.getColor() && //check for same color edges
+							getGameTile(xCenter - 1, yCenter - 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter, yCenter - 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter + 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter, yCenter + 2).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter + 1).getPlayerColor != p.getColor())
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				{
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
+					{
+						return true;
+					}
+
+					if (getGameTile(xCenter + 1, yCenter + 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter - 2, yCenter + 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter - 2, yCenter - 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter - 1, yCenter - 2).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter + 1, yCenter - 2).getPlayerColor == p.getColor())
+					{
+						if (getGameTile(xCenter - 2, yCenter).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter + 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter, yCenter + 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter - 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter, yCenter - 2).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter - 1).getPlayerColor != p.getColor())
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied())
+			{
+				if ((xCenter + 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter - 1 < 20))
+				{
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1== validCornerY(p.getColor())))
+					{
+						return true;
+					}
+
+					if (getGameTile(xCenter - 1, yCenter + 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter + 2, yCenter + 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter + 2, yCenter - 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter + 1, yCenter - 2).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter - 1, yCenter - 2).getPlayerColor == p.getColor())
+					{
+						if (getGameTile(xCenter + 2, yCenter).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter + 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter, yCenter + 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter - 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter, yCenter - 2).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter - 1).getPlayerColor != p.getColor())
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter + 1).isOccupied())
+			{
+				if ((xCenter + 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				{
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
+					{
+						return true;
+					}
+
+					if (getGameTile(xCenter - 1, yCenter - 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter + 2, yCenter - 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter + 2, yCenter + 1).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter + 1, yCenter + 2).getPlayerColor == p.getColor() ||
+						getGameTile(xCenter - 1, yCenter + 2).getPlayerColor == p.getColor())
+					{
+						if (getGameTile(xCenter + 2, yCenter).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter - 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter, yCenter - 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter + 1).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter, yCenter + 2).getPlayerColor != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter + 1).getPlayerColor != p.getColor())
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+		}
+		break;
+
+		/*
+			So, upon doing the example, I learned a few things. A: this is going to be very long, as there are 20 of those left to do.
+			B: I am sorry for anyone who has to work on this. I would not have done this if I thought that anyone but me would have to work
+			on this function. C: I found out that for each orientation, you can just reverse certain x and y values. for East, reverse
+			y values. For south, reverse x and y values. For west, reverse x values. For each case, logically figure out North orientation, 
+			then reverse values accordingly for the rest of the orientations
+		*/
+			
+	}
+
 	return false;
 }
 int Board::redTiles()

@@ -13,6 +13,9 @@ private:
 public:
 	Board() {}
 	bool fillTile(int x, int y, Player p);
+	Tile getGameTile(int x, int y);
+	int validCornerX(color c);
+	int validCornerY(color c);
 	bool placePiece(int xCenter, int yCenter, Player p, shape s);
 	bool validate(int xCenter, int yCenter, Player p, shape s);
 	int redTiles();

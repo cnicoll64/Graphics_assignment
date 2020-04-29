@@ -2,13 +2,10 @@
 
 BlokusShape::BlokusShape()
 {
+	status = true;
+	flipped = false;
+	orientation = North;
 
-
-}
-
-int BlokusShape::getTileNum()
-{
-	return tileNum;
 }
 
 shape BlokusShape::getType()
@@ -45,12 +42,6 @@ bool BlokusShape::flip()
 	}
 	flipped = true;
 	return 1;
-}
-
-bool BlokusShape::setTileNum(int newNum)
-{
-	tileNum = newNum;
-	return true;
 }
 
 bool BlokusShape::setType(shape newType)

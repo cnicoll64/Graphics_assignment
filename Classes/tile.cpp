@@ -3,6 +3,7 @@
 Tile::Tile()
 {
 	occupied = false;
+	playerColor = None;
 }
 
 bool Tile::isOccupied()

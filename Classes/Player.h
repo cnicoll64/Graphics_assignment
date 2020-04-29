@@ -4,7 +4,7 @@
 #include "std.h"
 #include "BlokusShape.h"
 
-enum color { Red, Blue, Green, Yellow };
+enum color { None, Red, Blue, Green, Yellow };
 
 class Player
 {

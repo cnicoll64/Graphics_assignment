@@ -33,8 +33,7 @@ enum direction{North, East, South, West}; // north orientation is defined by blo
 
 class BlokusShape
 {
-protected:
-	int tileNum;
+private:
 	shape type;
 	direction orientation;
 	bool flipped; // if true, shape is flipped horizontally (only allows for different shapes for a few pieces)
@@ -42,13 +41,11 @@ protected:
 
 public:
 	BlokusShape();
-	int getTileNum();
 	shape getType();
 	int getTypeInt();
 	direction getOrientation();
 	bool isFlipped();
 	bool getStatus();
-	bool setTileNum(int newNum);
 	bool setType(shape newType);
 	bool rotate(bool clockwise); // 1 is clockwise, 0 is counterclockwise
 	bool placed();

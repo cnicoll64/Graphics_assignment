@@ -219,7 +219,7 @@ bool menu::highlightTexture(sf::Sprite& input)
 	if ((sf::Mouse::getPosition(*window).x >= input.getPosition().x && sf::Mouse::getPosition(*window).x <= (input.getGlobalBounds().width + input.getPosition().x))
 		&& (sf::Mouse::getPosition(*window).y >= input.getPosition().y && sf::Mouse::getPosition(*window).y <= (input.getPosition().y + input.getGlobalBounds().height))) {
 
-		input.setColor(sf::Color(255, 255, 255, 200));
+		input.setColor(sf::Color(51, 51, 51, 255));
 
 		return 1;
 	}

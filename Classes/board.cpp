@@ -1,4 +1,5 @@
 #include "board.h"
+#include "Player.h"
 
 bool Board::fillTile(int x, int y, Player p)
 {
@@ -997,19 +998,19 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 						return true;
 					}
 
-					if (getGameTile(xCenter + 1, yCenter - 1).getPlayerColor == p.getColor() ||//check if corner is the right color
-						getGameTile(xCenter - 2, yCenter - 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter - 2, yCenter + 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter - 1, yCenter + 2).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter + 1, yCenter + 2).getPlayerColor == p.getColor())
+					if (getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor() ||//check if corner is the right color
+						getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor())
 					{
-						if (getGameTile(xCenter - 2, yCenter).getPlayerColor != p.getColor() && //check for same color edges
-							getGameTile(xCenter - 1, yCenter - 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter, yCenter - 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter + 1, yCenter).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter + 1, yCenter + 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter, yCenter + 2).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter - 1, yCenter + 1).getPlayerColor != p.getColor())
+						if (getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor() && //check for same color edges
+							getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor())
 						{
 							return true;
 						}
@@ -1032,19 +1033,19 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 						return true;
 					}
 
-					if (getGameTile(xCenter + 1, yCenter + 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter - 2, yCenter + 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter - 2, yCenter - 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter - 1, yCenter - 2).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter + 1, yCenter - 2).getPlayerColor == p.getColor())
+					if (getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor())
 					{
-						if (getGameTile(xCenter - 2, yCenter).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter - 1, yCenter + 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter, yCenter + 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter + 1, yCenter).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter + 1, yCenter - 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter, yCenter - 2).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter - 1, yCenter - 1).getPlayerColor != p.getColor())
+						if (getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor())
 						{
 							return true;
 						}
@@ -1067,19 +1068,19 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 						return true;
 					}
 
-					if (getGameTile(xCenter - 1, yCenter + 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter + 2, yCenter + 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter + 2, yCenter - 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter + 1, yCenter - 2).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter - 1, yCenter - 2).getPlayerColor == p.getColor())
+					if (getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor())
 					{
-						if (getGameTile(xCenter + 2, yCenter).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter + 1, yCenter + 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter, yCenter + 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter - 1, yCenter).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter - 1, yCenter - 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter, yCenter - 2).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter + 1, yCenter - 1).getPlayerColor != p.getColor())
+						if (getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor())
 						{
 							return true;
 						}
@@ -1102,19 +1103,19 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 						return true;
 					}
 
-					if (getGameTile(xCenter - 1, yCenter - 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter + 2, yCenter - 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter + 2, yCenter + 1).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter + 1, yCenter + 2).getPlayerColor == p.getColor() ||
-						getGameTile(xCenter - 1, yCenter + 2).getPlayerColor == p.getColor())
+					if (getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor() ||
+						getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor())
 					{
-						if (getGameTile(xCenter + 2, yCenter).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter + 1, yCenter - 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter, yCenter - 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter - 1, yCenter).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter - 1, yCenter + 1).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter, yCenter + 2).getPlayerColor != p.getColor() &&
-							getGameTile(xCenter + 1, yCenter + 1).getPlayerColor != p.getColor())
+						if (getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor() &&
+							getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor())
 						{
 							return true;
 						}

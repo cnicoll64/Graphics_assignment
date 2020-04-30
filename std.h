@@ -9,7 +9,9 @@
 
 using namespace std;
 
-#include "Classes/menu.h"
+//#include "Classes/menu.h"
+//#include "Classes/board.h"
+
 
 //constant Macro declairation for window size
 #define Window_Width 1366

@@ -146,6 +146,7 @@ int menu::chooseGame()
 	}
 }
 
+//renders options menu
 void menu::refresh()
 {
 
@@ -166,6 +167,7 @@ void menu::refresh()
 	(*window).display();
 }
 
+//displays window with rules for user on how to play blokus
 void menu::printRules()
 {
 	bool flag = true;
@@ -176,11 +178,29 @@ void menu::printRules()
 
 	Title.setPosition(sf::Vector2f( (Window_Width - Title.getGlobalBounds().width) / 2, 25));
 
-	body.setString("Blokus is a two player game that involes squares with different colors.");
+	
+	//string courtesy of www.ultraboardgames.com/blokus/game-rules.php
+	string message = "\tBlokus is a multi player game that involes squares with different colors. The game ends when all players are blocked\nfrom laying down any more of their pieces.";
+	
+	message.append(" This also includes any players who may have placed all of their pieces on the board.\n");
+
+	message.append("The first piece played by each player must cover a corner square. ");
+
+	message.append("Each new piece must touch at least\n one other piece of the same color, but only at the corners. Pieces of the same color cannot be in contact along an edge.");
+
+	message.append("\nScores are tallied, and the player with the highest score is the winner. ");
+
+	message.append("Each player then counts the number of unit squares in \nhis / her remaining pieces(1 unit square = -1 point). ");
+
+	message.append("A player earns + 15 points if all his / her pieces have been placed on the board \nplus 5 additional bonus points if the last piece placed on the board was the smallest piece(one square).");
+	
+	body.setString(message);
+
 	body.setCharacterSize(20);
+	body.setLineSpacing(1.5);
 	body.setFillColor(sf::Color::Black);
 
-	body.setPosition(sf::Vector2f((Window_Width - body.getGlobalBounds().width) / 2, 100));
+	body.setPosition(sf::Vector2f((Window_Width - body.getGlobalBounds().width) / 2, 200));
 	returned_s.setPosition(sf::Vector2f((Window_Width - returned_s.getGlobalBounds().width) / 2, 600));
 
 	while ((*window).isOpen() && flag) {

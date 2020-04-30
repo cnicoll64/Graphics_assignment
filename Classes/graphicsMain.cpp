@@ -1,4 +1,6 @@
 #include "std.h"
+#include "menu.h"
+#include "Blokus.h"
 
 int main(void)
 {
@@ -13,13 +15,39 @@ int main(void)
 
 	gametype = Start_Screen.chooseGame();
 
-	//test output to console - can be removed if desired
-	cout << "Game menu returned: " << gametype << endl;
+	
+	switch (gametype) {
+
+	case 2: { //two player Game w/ two AI
+		TwoPlayer_Game Game_two;
+
+		Game_two.playGame();
+
+		break;
+	}case 3: { //three player Game w/ one AI
+		ThreePlayer_Game Game_three;
+
+		Game_three.playGame();
+
+		break;
+
+	}case 4: { //four player Game no AI
+		FourPlayer_Game Game_four;
+
+		Game_four.playGame();
+
+		break;
+
+	}default:
+			//end program
+		break;
+
+	}
+
+
 
 
 	//////////////////////////////////////////////////////////////////////////////////////end menu code
-
-
 
 
 	//Create Window

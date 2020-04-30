@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "board.h"
 
 Player::Player(color newPlayerColor)
 {
@@ -17,6 +18,19 @@ color Player::getColor()
 BlokusShape Player::getShape(int shapeNum)
 {
 	return pieces[shapeNum];
+}
+
+int Player::shapeNum()
+{
+	int n = 0;
+	for (int index = 0; index < 21; ++index)
+	{
+		if (pieces[index].getStatus())
+		{
+			++n;
+		}
+	}
+	return n;
 }
 
 bool Player::hasPiece(shape type)

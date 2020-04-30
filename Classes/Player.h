@@ -16,6 +16,7 @@ public:
 	Player(color newPlayerColor);
 	color getColor();
 	BlokusShape getShape(int shapeNum);
+	int shapeNum();
 	bool hasPiece(shape type);
 	bool discardPiece(shape type);
 };

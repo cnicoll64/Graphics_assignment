@@ -35,7 +35,7 @@ bool BlokusShape::isFlipped()
 
 bool BlokusShape::flip()
 {
-	if (flipped = true)
+	if (flipped == true)
 	{
 		flipped = false;
 		return 1;
@@ -52,13 +52,23 @@ bool BlokusShape::setType(shape newType)
 
 bool BlokusShape::rotate(bool clockwise)
 {
-	if (clockwise) // does not allow for counterclockwise rotation in north orientation or clockwise in west orientation
+	if (clockwise)
 	{
-		orientation = (direction)(orientation + 1);
-		return true;
+		if ((int)getOrientation() < 3) // if orientation is not West
+		{
+			orientation = (direction)(orientation + 1); // rotate clockwise
+			return true; //exit
+		}
+		orientation = North; // else set equal to North
+		return true; //exit
 	}
-	orientation = (direction)(orientation - 1);
-	return true; 
+	if ((int)getOrientation() > 1) // if  orientation is not North
+	{
+		orientation = (direction)(orientation - 1);// rotate counterclockwise
+		return true; //exit
+	}
+	orientation = West; // else set equal to West
+	return true; //exit
 }
 
 bool BlokusShape::placed()

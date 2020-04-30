@@ -46,8 +46,6 @@ int main(void)
 	}
 
 
-
-
 	//////////////////////////////////////////////////////////////////////////////////////end menu code
 
 
@@ -77,7 +75,7 @@ int main(void)
 	text.setString("Player ");
 	text.setCharacterSize(15);
 	sf::Text playerNum("", gameFont);
-	playerNum.setString(currentPlayer.getNum());
+	//playerNum.setString(currentPlayer.getNum());  <- fix me
 	text.setCharacterSize(15);
 	sf::Text textEnd("", gameFont);
 	playerNum.setString("'s turn");
@@ -92,54 +90,54 @@ int main(void)
 
 	sf::RectangleShape tileSmall(sf::Vector2f(20, 20));
 	tileSmall.setFillColor(sf::Color::Black);
-	tile.setOutlineColor(sf::Color:Black);
-	tile.setOutlineThickness(2); 
+	tile.setOutlineColor(sf::Color::Black);
+	tile.setOutlineThickness(2);
 
 	//Create pieces
 	for (int i = 1; i <= 4; i++)
 	{
-		Piece p1 = new Piece(i);
-		p1.setShape(1);
-		Piece p2 = new Piece(i);
-		p2.setShape(1, 2);
-		Piece p3 = new Piece(i);
-		p3.setShape(1, 2, 7);
-		Piece p4 = new Piece(i);
-		p4.setShape(1, 2, 3);
-		Piece p5 = new Piece(i);
-		p5.setShape(1, 2, 6, 7);
-		Piece p6 = new Piece(i);
-		p6.setShape(2, 6, 7, 8);
-		Piece p7 = new Piece(i);
-		p7.setShape(1, 2, 3, 4);
-		Piece p8 = new Piece(i);
-		p8.setShape(3, 6, 7, 8);
-		Piece p9 = new Piece(i);
-		p9.setShape(2, 3, 6, 7);
-		Piece p10 = new Piece(i);
-		p10.setShape(1, 6, 7, 8, 9);
-		Piece p11 = new Piece(i);
-		p11.setShape(2, 7, 11, 12, 13);
-		Piece p12 = new Piece(i);
-		p12.setShape(1, 6, 11, 12, 13);
-		Piece p13 = new Piece(i);
-		p13.setShape(2, 3, 4, 6, 7);
-		Piece p14 = new Piece(i);
-		p14.setShape(3, 6, 7, 8, 11);
-		Piece p15 = new Piece(i);
-		p15.setShape(1, 6, 11, 16, 21);
-		Piece p16 = new Piece(i);
-		p16.setShape(1, 6, 11, 7, 12);
-		Piece p17 = new Piece(i);
-		p17.setShape(2, 3, 6, 7, 11);
-		Piece p18 = new Piece(i);
-		p18.setShape(1, 2, 6, 11, 12);
-		Piece p19 = new Piece(i);
-		p19.setShape(2, 3, 6, 7, 12);
-		Piece p20 = new Piece(i);
-		p20.setShape(2, 6, 7, 8, 12);
-		Piece p21 = new Piece(i);
-		p21.setShape(2, 6, 7, 8, 9);
+		Piece* p1 = new Piece(i);
+		p1->setShape(1);
+		Piece* p2 = new Piece(i);
+		p2->setShape(1, 2);
+		Piece* p3 = new Piece(i);
+		p3->setShape(1, 2, 7);
+		Piece* p4 = new Piece(i);
+		p4->setShape(1, 2, 3);
+		Piece* p5 = new Piece(i);
+		p5->setShape(1, 2, 6, 7);
+		Piece* p6 = new Piece(i);
+		p6->setShape(2, 6, 7, 8);
+		Piece* p7 = new Piece(i);
+		p7->setShape(1, 2, 3, 4);
+		Piece* p8 = new Piece(i);
+		p8->setShape(3, 6, 7, 8);
+		Piece* p9 = new Piece(i);
+		p9->setShape(2, 3, 6, 7);
+		Piece* p10 = new Piece(i);
+		p10->setShape(1, 6, 7, 8, 9);
+		Piece* p11 = new Piece(i);
+		p11->setShape(2, 7, 11, 12, 13);
+		Piece* p12 = new Piece(i);
+		p12->setShape(1, 6, 11, 12, 13);
+		Piece* p13 = new Piece(i);
+		p13->setShape(2, 3, 4, 6, 7);
+		Piece* p14 = new Piece(i);
+		p14->setShape(3, 6, 7, 8, 11);
+		Piece* p15 = new Piece(i);
+		p15->setShape(1, 6, 11, 16, 21);
+		Piece* p16 = new Piece(i);
+		p16->setShape(1, 6, 11, 7, 12);
+		Piece* p17 = new Piece(i);
+		p17->setShape(2, 3, 6, 7, 11);
+		Piece* p18 = new Piece(i);
+		p18->setShape(1, 2, 6, 11, 12);
+		Piece* p19 = new Piece(i);
+		p19->setShape(2, 3, 6, 7, 12);
+		Piece* p20 = new Piece(i);
+		p20->setShape(2, 6, 7, 8, 12);
+		Piece* p21 = new Piece(i);
+		p21->setShape(2, 6, 7, 8, 9);
 	}
 
 	//draw and maybe tick?
@@ -173,7 +171,7 @@ int main(void)
 				window.draw(tile);
 			}
 		}
-
+		/*
 		//displays each player's turn
 		text.setPosition(420, 890);
 		playerNum.setPosition(430, 890);
@@ -181,7 +179,7 @@ int main(void)
 		//display each piece still available to the player at hand
 		for (int i = 0; i < 21; i++)
 		{
-			int tempArray[5][5] = piecesArray.getGeo();
+			//int tempArray[5][5] = piecesArray.getGeo(); <- fix me
 			if (!(piecesArray[i].getPlayed))
 			{
 				for (int j = 0; j < 5; j++)
@@ -225,7 +223,10 @@ int main(void)
 	}
 
 
+	*/
 
+		}
+	
 
 	return 0;
 }

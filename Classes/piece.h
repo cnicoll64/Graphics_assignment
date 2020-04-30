@@ -75,33 +75,33 @@ void Piece::rotate()
 
 void Piece::setShape(int s1)
 {
-	geometry[][] = player;
+	//geometry[s1][] = player;   <- fix me
 }
 void Piece::setShape(int s1, int s2)
 {
-	geometry[][] = player;
-	geometry[][] = player;
+	//geometry[][] = player;
+	//geometry[][] = player;
 }
 void Piece::setShape(int s1, int s2, int s3)
 {
-	geometry[][] = player;
-	geometry[][] = player;
-	geometry[][] = player;
+	//geometry[][] = player;
+	//geometry[][] = player;
+	//geometry[][] = player;
 }
 void Piece::setShape(int s1, int s2, int s3, int s4)
 {
-	geometry[][] = player;
-	geometry[][] = player;
-	geometry[][] = player;
-	geometry[][] = player;
+	//geometry[][] = player;
+	//geometry[][] = player;
+	//geometry[][] = player;
+	//geometry[][] = player;
 }
 void Piece::setShape(int s1, int s2, int s3, int s4, int s5)
 {
-	geometry[][] = player;
-	geometry[][] = player;
-	geometry[][] = player;
-	geometry[][] = player;
-	geometry[][] = player;
+	//geometry[][] = player;
+	//geometry[][] = player;
+	//geometry[][] = player;
+	//geometry[][] = player;
+	//geometry[][] = player;
 }
 
 void Piece::setPlayed(bool state)

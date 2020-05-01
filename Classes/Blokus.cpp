@@ -15,7 +15,17 @@ Blokus::Blokus()
 	GameWindow = new sf::RenderWindow(sf::VideoMode(Window_Width, Window_Height), "Blokus", sf::Style::Default);
 	GameWindow->setIcon(gimp_image.width, gimp_image.height, gimp_image.pixel_data);
 
-	//add graphic drivers
+	GameWindow->setFramerateLimit(120);
+
+	//Create Game Font
+	gameFont = new sf::Font;
+	if (!gameFont->loadFromFile("Righteous-Regular.ttf"));
+
+	//set for player-turn 
+	text = new sf::Text;
+	text->setCharacterSize(15);
+	text->setString("");
+
 }
 
 //TwoPlayer definitons here

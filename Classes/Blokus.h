@@ -19,7 +19,12 @@ private:
 	Board *GameBoard;
 	Player* player1;
 	Player* player2;
+
+	//graphic stuff below
 	sf::RenderWindow* GameWindow;
+	sf::Font* gameFont;
+
+	sf::Text* text;
 
 	//add sprites and textures here
 };

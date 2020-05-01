@@ -64,22 +64,20 @@ int main(void)
 	}
 
 	//Create Window
-	sf::RenderWindow window(sf::VideoMode(1366, 768), "Blokus");
-	window.setFramerateLimit(120);
-
-	//Create Font
-	sf::Font gameFont;
-	gameFont.loadFromFile("Righteous-Regular.ttf");
+	//sf::RenderWindow window(sf::VideoMode(1366, 768), "Blokus");
+	
 	//Create Title
-	sf::Text text("", gameFont);
+
+	/*sf::Text text("", gameFont);
 	text.setString("Player ");
 	text.setCharacterSize(15);
-	sf::Text playerNum("", gameFont);
+	sf::Text playerNum("", gameFont);*/
+
 	//playerNum.setString(currentPlayer.getNum());  <- fix me
-	text.setCharacterSize(15);
-	sf::Text textEnd("", gameFont);
-	playerNum.setString("'s turn");
-	text.setCharacterSize(15);
+	//text.setCharacterSize(15);
+	//sf::Text textEnd("", gameFont);
+	//playerNum.setString("'s turn");
+	//text.setCharacterSize(15);
 
 	//text.setColor(sf::Color::Red);
 
@@ -140,37 +138,37 @@ int main(void)
 		p21->setShape(2, 6, 7, 8, 9);
 	}
 
-	//draw and maybe tick?
-	while (window.isOpen())
-	{
-		window.clear();
+	////draw and maybe tick?
+	//while (window.isOpen())
+	//{
+	//	window.clear();
 
-		for (int i = 0; i < 20; i++)
-		{
-			for (int j = 0; j < 20; j++)
-			{
-				tile.setPosition((i * size) + 20, (j * size) + 20);
-				switch (board[i][j])
-				{
-				case 1:
-					tile.setFillColor(sf::Color::Red);
-					break;
-				case 2:
-					tile.setFillColor(sf::Color::Blue);
-					break;
-				case 3:
-					tile.setFillColor(sf::Color::Green);
-					break;
-				case 4:
-					tile.setFillColor(sf::Color::Yellow);
-					break;
-				default:
-					tile.setFillColor(sf::Color::White);
-					break;
-				}
-				window.draw(tile);
-			}
-		}
+	//	for (int i = 0; i < 20; i++)
+	//	{
+	//		for (int j = 0; j < 20; j++)
+	//		{
+	//			tile.setPosition((i * size) + 20, (j * size) + 20);
+	//			switch (board[i][j])
+	//			{
+	//			case 1:
+	//				tile.setFillColor(sf::Color::Red);
+	//				break;
+	//			case 2:
+	//				tile.setFillColor(sf::Color::Blue);
+	//				break;
+	//			case 3:
+	//				tile.setFillColor(sf::Color::Green);
+	//				break;
+	//			case 4:
+	//				tile.setFillColor(sf::Color::Yellow);
+	//				break;
+	//			default:
+	//				tile.setFillColor(sf::Color::White);
+	//				break;
+	//			}
+	//			window.draw(tile);
+	//		}
+	//	}
 		/*
 		//displays each player's turn
 		text.setPosition(420, 890);
@@ -225,7 +223,7 @@ int main(void)
 
 	*/
 
-		}
+		//}
 	
 
 	return 0;

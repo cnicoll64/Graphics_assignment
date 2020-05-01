@@ -198,7 +198,7 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 			UserText_x.setString(x);
 			UserText_y.setString(y);
 
-			//gets coordinates via text
+			//gets coordinates via text - for x text block
 			if (HighlighTextField(field1, window)) {
 				
 				UserText_x.setFillColor(sf::Color::White);
@@ -207,8 +207,16 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 					userInput_x += event->text.unicode;
 					UserText_x.setString(userInput_x);
 					x = userInput_x.toAnsiString();
+
+					//allows user to delete things in text block
+					if (event->text.unicode == '\b') {
+						userInput_x = " ";
+						x = userInput_x.toAnsiString();
+					}
 				}
-			}
+
+				
+			} ///for y textblock
 			else if (HighlighTextField(field2, window)) {
 
 				UserText_y.setFillColor(sf::Color::White);
@@ -217,6 +225,12 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 					userInput_y += event->text.unicode;
 					UserText_y.setString(userInput_x);
 					y = userInput_y.toAnsiString();
+
+					//allows user to delete in text block
+					if (event->text.unicode == '\b') {
+						userInput_y = " ";
+						y = userInput_y.toAnsiString();
+					}
 				}
 			}
 
@@ -254,12 +268,13 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 			}
 			
 			window.clear(sf::Color::Color(214, 214, 214, 255));
+			
 
 			//prevents some non integer inputs
 			if (isNum(x) && isNum(y)) {
 
 				//checks if peice works, if so places shape
-				if (GameBoard->validate(stoi(x) +1, stoi(y)+1, input, currentpeice)) {
+				if (GameBoard->validate(stoi(y), stoi(x), input, currentpeice)) {
 
 					Place_Shape->setPosition(sf::Vector2f((500 - Place_Shape->getGlobalBounds().width) / 2, 550));
 					window.draw(*Place_Shape);
@@ -271,7 +286,7 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 							flag = false;
 
 							//add peice validation
-							GameBoard->placePiece(stoi(x) + 1, stoi(y) + 1, input, currentpeice);
+							GameBoard->placePiece(stoi(y), stoi(x), input, currentpeice);
 
 
 						}
@@ -380,6 +395,11 @@ TwoPlayer_Game::TwoPlayer_Game()
 
 			printGrid();
 
+			placeShape(*player2, FourS);
+
+			printGrid();
+
+			placeShape(*player2, ThreeL);
 
 			GameWindow->display();
 		}

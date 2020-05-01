@@ -32,7 +32,8 @@ Blokus::Blokus()
 
 TwoPlayer_Game::TwoPlayer_Game()
 {
-	//add two AI players here
+	player3 = new AIPlayer(Green);
+	player4 = new AIPlayer(Yellow);
 }
 
 void TwoPlayer_Game::playGame()
@@ -48,7 +49,7 @@ void TwoPlayer_Game::playGame()
 ThreePlayer_Game::ThreePlayer_Game()
 {
 	player3 = new Player(Green);
-
+	player4 = new AIPlayer(Yellow);
 	//add AI
 }
 

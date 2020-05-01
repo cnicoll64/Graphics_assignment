@@ -13,6 +13,7 @@ protected:
 	BlokusShape pieces[21];
 
 public:
+	Player() {}
 	Player(color newPlayerColor);
 	color getColor();
 	BlokusShape getShape(int shapeNum);
@@ -21,4 +22,10 @@ public:
 	bool discardPiece(shape type);
 };
 
+class AIPlayer : public Player
+{
+public:
+	AIPlayer(color newPlayerColor);
+	bool AITurnRand(Board b);
+};
 #endif

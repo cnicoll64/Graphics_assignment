@@ -15,7 +15,7 @@ public:
 	virtual void playGame() = 0;
 
 
-private:
+protected:
 	Board *GameBoard;
 	Player* player1;
 	Player* player2;
@@ -41,13 +41,8 @@ public:
 
 
 private:
-	Board* GameBoard;
-	Player* player1;
-	Player* player2;
-
-	//add AI here
-
-	sf::RenderWindow* GameWindow;
+	AIPlayer* player3;
+	AIPlayer* player4;
 };
 
 
@@ -61,15 +56,8 @@ public:
 
 
 private:
-	Board* GameBoard;
-	Player* player1;
-	Player* player2;
 	Player* player3;
-
-	//add AI here
-
-	sf::RenderWindow* GameWindow;
-
+	AIPlayer* player4;
 };
 
 
@@ -83,16 +71,8 @@ public:
 
 
 private:
-	Board* GameBoard;
-	Player* player1;
-	Player* player2;
 	Player* player3;
 	Player* player4;
-
-	
-
-	sf::RenderWindow* GameWindow;
-
 };
 
 

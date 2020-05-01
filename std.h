@@ -6,7 +6,6 @@
 #include "SFML/Graphics.hpp"
 #include <iostream>
 #include <string.h>
-#include "board.h"
 
 using namespace std;
 

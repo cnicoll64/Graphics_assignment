@@ -11,13 +11,16 @@ class Blokus
 public:
 	Blokus();
 
+	//graphics functions
 	void printGrid();
+	void placeShape(Player& input);
 
 	//pure virtual declaration
 	virtual void playGame() = 0;
 
 
 protected:
+	bool HighlighBtn(sf::RectangleShape& input, sf::RenderWindow& window);
 	Board *GameBoard;
 	Player* player1;
 	Player* player2;

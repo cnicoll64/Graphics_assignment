@@ -72,15 +72,187 @@ void Blokus::printGrid()
 	}
 }
 
+//need to add shape, not too big deal
+void Blokus::placeShape(Player& input)
+{
+	bool flag = true;
+	string x = "", y = "";
+	string title;
+
+	sf::String userInput_x, userInput_y;
+	sf::Text UserText_x, UserText_y;
+
+
+	//sets window title
+	if (input.getColor() == Blue) {
+		title = "Blue Shape Placer";
+	} 
+	else if (input.getColor() == Red) {
+		title = "Red Shape Placer";
+	} 
+	else if (input.getColor() == Yellow) {
+		title = "Yellow Shape Placer";
+	}
+	else if (input.getColor() == Green) {
+		title = "Green Shape Placer";
+	}
+	
+	sf::RenderWindow window(sf::VideoMode(500, 700), title);
+	window.setPosition(sf::Vector2i(10, 50));
+
+	//sets instructions
+	sf::Text Title, Input_X, Input_Y;
+	Title.setFont(*gameFont);
+	Title.setFillColor(sf::Color::Black);
+	Title.setString("Please Enter the X and Y coordinates for your shape");
+	Title.setCharacterSize(18);
+	Title.setPosition(sf::Vector2f((500 - Title.getGlobalBounds().width) / 2, 50));
+
+	Input_X.setFont(*gameFont);
+	Input_X.setFillColor(sf::Color::Black);
+	Input_X.setString("Please Enter the X Coordinate:");
+	Input_X.setCharacterSize(10);
+	Input_X.setPosition(sf::Vector2f(20, 350));
+	Input_X.setStyle(sf::Text::Underlined);
+	
+	Input_Y.setFont(*gameFont);
+	Input_Y.setFillColor(sf::Color::Black);
+	Input_Y.setString("Please Enter the Y Coordinate:");
+	Input_Y.setCharacterSize(10);
+	Input_Y.setPosition(sf::Vector2f(500-170, 350));
+	Input_Y.setStyle(sf::Text::Underlined);
+
+	Input_Y.setFont(*gameFont);
+	Input_Y.setFillColor(sf::Color::Black);
+	Input_Y.setString("Please Enter the Y Coordinate:");
+	Input_Y.setCharacterSize(10);
+	Input_Y.setPosition(sf::Vector2f(500 - 170, 350));
+	Input_Y.setStyle(sf::Text::Underlined);
+
+	UserText_x.setFont(*gameFont);
+	UserText_x.setFillColor(sf::Color::Black);
+	UserText_x.setCharacterSize(20);
+	UserText_x.setPosition(sf::Vector2f(20, 400));
+
+	UserText_y.setFont(*gameFont);
+	UserText_y.setCharacterSize(20);
+	UserText_y.setPosition(sf::Vector2f(500 - 170, 400));
+	
+
+	sf::RectangleShape field1, field2;
+
+	field1.setSize(sf::Vector2f(150, 50));
+	field2.setSize(sf::Vector2f(150, 50));
+
+	field1.setFillColor(sf::Color::White);
+	field2.setFillColor(sf::Color::White);
+
+	field1.setPosition(sf::Vector2f(20, 400));
+	field2.setPosition(sf::Vector2f(500 - 170, 400));
+
+	while (window.isOpen() && flag) {
+
+		sf::Event* event = new sf::Event;
+
+		while (window.pollEvent(*event)) {
+
+			UserText_y.setFillColor(sf::Color::Black);
+			UserText_x.setFillColor(sf::Color::Black);
+
+			if (event->type == sf::Event::Closed) {
+				window.close();
+
+			}
+
+			UserText_x.setString(x);
+			UserText_y.setString(y);
+
+			if (HighlighBtn(field1, window)) {
+				
+				UserText_x.setFillColor(sf::Color::White);
+
+				if (event->type == sf::Event::TextEntered) {
+					userInput_x += event->text.unicode;
+					UserText_x.setString(userInput_x);
+					x = userInput_x.toAnsiString();
+				}
+			}
+			else if (HighlighBtn(field2, window)) {
+
+				UserText_y.setFillColor(sf::Color::White);
+
+				if (event->type == sf::Event::TextEntered) {
+					userInput_y += event->text.unicode;
+					UserText_y.setString(userInput_x);
+					y = userInput_y.toAnsiString();
+				}
+
+				
+
+			}
+
+			//prevents some non integer inputs
+			if (x != "" && y != "") {
+
+
+
+				GameBoard->placePiece(stoi(x), stoi(y), input, One);
+
+
+				////if coordinates work then places peice
+				//if (GameBoard->validate(stoi(x), stoi(y), input, One)) {
+
+				//	GameBoard->placePiece(stoi(x), stoi(y), input, One);
+				//
+				//	flag = false;
+				//}
+			}
+
+			
+
+			window.clear(sf::Color::Color(214, 214, 214, 255));
+			window.draw(Title);
+			window.draw(field1);
+			window.draw(field2);
+			window.draw(Input_X);
+			window.draw(Input_Y);
+			window.draw(UserText_x);
+			window.draw(UserText_y);
+			window.display();
+		}
+	}
+
+}
+
+
+//highlights text input boxes when moused over
+bool Blokus::HighlighBtn(sf::RectangleShape &input, sf::RenderWindow &window)
+{
+	if ((sf::Mouse::getPosition(window).x >= input.getPosition().x && sf::Mouse::getPosition(window).x <= (input.getGlobalBounds().width + input.getPosition().x))
+		&& (sf::Mouse::getPosition(window).y >= input.getPosition().y && sf::Mouse::getPosition(window).y <= (input.getPosition().y + input.getGlobalBounds().height))) {
+
+		input.setFillColor(sf::Color(51, 51, 51, 255));
+
+		return 1;
+	}
+	else {
+		input.setFillColor(sf::Color::White);
+
+		return 0;
+	}
+}
+
 //TwoPlayer definitons here
 
 TwoPlayer_Game::TwoPlayer_Game()
 {
 	
-
+	//test case
 	GameBoard->placePiece(10, 15, *player1, FiveL);
 
 	GameBoard->placePiece(5, 10, *player2, FiveC);
+
+	//test case
 
 	while (GameWindow->isOpen()) {
 	
@@ -92,6 +264,8 @@ TwoPlayer_Game::TwoPlayer_Game()
 				GameWindow->close();
 
 			}
+
+			placeShape(*player1);
 
 			GameWindow->clear(sf::Color::Color(214, 214, 214, 255));
 

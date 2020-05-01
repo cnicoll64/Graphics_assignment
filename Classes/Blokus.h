@@ -25,6 +25,7 @@ protected:
 	Board *GameBoard;
 	Player* player1;
 	Player* player2;
+	bool isNum(string& input);
 
 	//graphic stuff below
 	sf::RenderWindow* GameWindow;

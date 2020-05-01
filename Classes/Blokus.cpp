@@ -91,20 +91,17 @@ void Blokus::printGrid()
 				square->setFillColor(sf::Color::White);
 			}
 
-
-
-
 			GameWindow->draw(*square);
 
 		}
 	}
 }
 
-//need to add shape, not too big deal
+
 void Blokus::placeShape(Player& input, shape currentpeice)
 {
 	bool flag = true;
-	string x = "", y = "";
+	string x = " ", y = " ";
 	string title;
 
 	sf::String userInput_x, userInput_y;
@@ -258,10 +255,10 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 			
 			window.clear(sf::Color::Color(214, 214, 214, 255));
 
-
 			//prevents some non integer inputs
-			if (x != "" && y != "") {
+			if (isNum(x) && isNum(y)) {
 
+				//checks if peice works, if so places shape
 				if (GameBoard->validate(stoi(x) +1, stoi(y)+1, input, currentpeice)) {
 
 					Place_Shape->setPosition(sf::Vector2f((500 - Place_Shape->getGlobalBounds().width) / 2, 550));
@@ -304,6 +301,7 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 			window.draw(*EndTurn);
 			window.draw(*ROT_CCW);
 			window.draw(*ROT_CW);
+			
 			window.display();
 		}
 	}
@@ -330,13 +328,6 @@ bool Blokus::highlightTexture(sf::Sprite& input, sf::RenderWindow &window)
 }
 
 
-
-
-
-
-
-
-
 //highlights text input boxes when moused over
 bool Blokus::HighlighTextField(sf::RectangleShape &input, sf::RenderWindow &window)
 {
@@ -354,18 +345,24 @@ bool Blokus::HighlighTextField(sf::RectangleShape &input, sf::RenderWindow &wind
 	}
 }
 
+//test condition for user input
+bool Blokus::isNum(string& input)
+{
+	bool result = true;
+
+	for (int i = 0; i < input.length(); i++) {
+		if (!isdigit(input.at(i))) {
+			result = false;
+		}
+	}
+	return result;
+}
+
 //TwoPlayer definitons here
 
 TwoPlayer_Game::TwoPlayer_Game()
 {
 	
-	////test case
-	//GameBoard->placePiece(10, 15, *player1, FiveL);
-
-	//GameBoard->placePiece(5, 10, *player2, FiveC);
-
-	//test case
-
 	while (GameWindow->isOpen()) {
 	
 		sf::Event* event = new sf::Event;
@@ -377,13 +374,11 @@ TwoPlayer_Game::TwoPlayer_Game()
 
 			}
 
-			placeShape(*player1, FiveC);
+			
 
 			GameWindow->clear(sf::Color::Color(214, 214, 214, 255));
 
 			printGrid();
-
-
 
 
 			GameWindow->display();

@@ -14,7 +14,6 @@ Blokus::Blokus()
 	//initializes GameWindow
 	GameWindow = new sf::RenderWindow(sf::VideoMode(Window_Width, Window_Height), "Blokus", sf::Style::Default);
 	GameWindow->setIcon(gimp_image.width, gimp_image.height, gimp_image.pixel_data);
-
 	GameWindow->setFramerateLimit(120);
 
 	//Create Game Font
@@ -23,8 +22,37 @@ Blokus::Blokus()
 
 	//set for player-turn 
 	text = new sf::Text;
+	rotation = new sf::Text;
+
 	text->setCharacterSize(15);
 	text->setString("");
+
+	rotation->setCharacterSize(13);
+	rotation->setFont(*gameFont);
+	rotation->setFillColor(sf::Color::Black);
+
+	placebtn = new sf::Texture;
+	endbtn = new sf::Texture;
+	CW = new sf::Texture;
+	CCW = new sf::Texture;
+	EndTurn = new sf::Sprite;
+	Place_Shape = new sf::Sprite;
+	ROT_CW = new sf::Sprite;
+	ROT_CCW = new sf::Sprite;
+
+	//init sprites for place menu
+	if (!(placebtn->loadFromFile("Place.png")));
+	if (!(endbtn->loadFromFile("EndTurn.png")));
+	if (!(CW->loadFromFile("CW.png")));
+	if (!(CCW->loadFromFile("CCW.png")));
+
+
+	EndTurn->setTexture(*endbtn);
+	Place_Shape->setTexture(*placebtn);
+	ROT_CW->setTexture(*CW);
+	ROT_CCW->setTexture(*CCW);
+
+	square = nullptr;
 
 }
 
@@ -73,7 +101,7 @@ void Blokus::printGrid()
 }
 
 //need to add shape, not too big deal
-void Blokus::placeShape(Player& input)
+void Blokus::placeShape(Player& input, shape currentpeice)
 {
 	bool flag = true;
 	string x = "", y = "";
@@ -150,6 +178,12 @@ void Blokus::placeShape(Player& input)
 	field1.setPosition(sf::Vector2f(20, 400));
 	field2.setPosition(sf::Vector2f(500 - 170, 400));
 
+	ROT_CW->setPosition(sf::Vector2f(500-115, 200));
+	ROT_CCW->setPosition(sf::Vector2f(40, 200));
+
+	
+	EndTurn->setPosition(sf::Vector2f((500 - EndTurn->getGlobalBounds().width) / 2, 650));
+
 	while (window.isOpen() && flag) {
 
 		sf::Event* event = new sf::Event;
@@ -167,7 +201,8 @@ void Blokus::placeShape(Player& input)
 			UserText_x.setString(x);
 			UserText_y.setString(y);
 
-			if (HighlighBtn(field1, window)) {
+			//gets coordinates via text
+			if (HighlighTextField(field1, window)) {
 				
 				UserText_x.setFillColor(sf::Color::White);
 
@@ -177,7 +212,7 @@ void Blokus::placeShape(Player& input)
 					x = userInput_x.toAnsiString();
 				}
 			}
-			else if (HighlighBtn(field2, window)) {
+			else if (HighlighTextField(field2, window)) {
 
 				UserText_y.setFillColor(sf::Color::White);
 
@@ -186,47 +221,124 @@ void Blokus::placeShape(Player& input)
 					UserText_y.setString(userInput_x);
 					y = userInput_y.toAnsiString();
 				}
+			}
 
-				
+			
+			//rotate functions here
+			rotation->setPosition(sf::Vector2f((500 - rotation->getGlobalBounds().width) / 2, 150));
+			
+			if (input.getShape(currentpeice).getOrientation() == 0) {
+				rotation->setString("Current Orientation: North");
+			}
+			else if (input.getShape(currentpeice).getOrientation() == 1) {
+				rotation->setString("Current Orientation: East");
+			}
+			else if (input.getShape(currentpeice).getOrientation() == 2) {
+				rotation->setString("Current Orientation: South");
+			}
+			else if (input.getShape(currentpeice).getOrientation() == 3) {
+				rotation->setString("Current Orientation: West");
+			}
+
+			if (highlightTexture(*ROT_CCW, window)) {
+				if (event->type == sf::Event::MouseButtonPressed) {
+
+					input.setShapeRotation(currentpeice, false);
+				}
 
 			}
+
+			if (highlightTexture(*ROT_CW, window)) {
+				if (event->type == sf::Event::MouseButtonPressed) {
+
+					input.setShapeRotation(currentpeice, true);
+				}
+
+			}
+			
+			window.clear(sf::Color::Color(214, 214, 214, 255));
+
 
 			//prevents some non integer inputs
 			if (x != "" && y != "") {
 
+				if (GameBoard->validate(stoi(x) +1, stoi(y)+1, input, currentpeice)) {
+
+					Place_Shape->setPosition(sf::Vector2f((500 - Place_Shape->getGlobalBounds().width) / 2, 550));
+					window.draw(*Place_Shape);
+
+					if (highlightTexture(*Place_Shape, window)) {
+
+						if (event->mouseButton.button == sf::Mouse::Left) {
+
+							flag = false;
+
+							//add peice validation
+							GameBoard->placePiece(stoi(x) + 1, stoi(y) + 1, input, currentpeice);
 
 
-				GameBoard->placePiece(stoi(x), stoi(y), input, One);
-
-
-				////if coordinates work then places peice
-				//if (GameBoard->validate(stoi(x), stoi(y), input, One)) {
-
-				//	GameBoard->placePiece(stoi(x), stoi(y), input, One);
-				//
-				//	flag = false;
-				//}
+						}
+					}
+				}
 			}
 
-			
+			//allows end turn for user
+			if (highlightTexture(*EndTurn, window)) {
+				if (event->mouseButton.button == sf::Mouse::Left) {
 
-			window.clear(sf::Color::Color(214, 214, 214, 255));
+					input.discardPiece(currentpeice); //discards selected peice
+					flag = false;
+				}
+
+			}
+
+			//displays text and graphics stuff
 			window.draw(Title);
+			window.draw(*rotation);
 			window.draw(field1);
 			window.draw(field2);
 			window.draw(Input_X);
 			window.draw(Input_Y);
 			window.draw(UserText_x);
 			window.draw(UserText_y);
+			window.draw(*EndTurn);
+			window.draw(*ROT_CCW);
+			window.draw(*ROT_CW);
 			window.display();
 		}
 	}
 
 }
 
+//returns 1 or 0: if user mouse is over game menu option, then it highlights that option and returns 1 else returns 0
+bool Blokus::highlightTexture(sf::Sprite& input, sf::RenderWindow &window)
+{
+
+	if ((sf::Mouse::getPosition(window).x >= input.getPosition().x && sf::Mouse::getPosition(window).x <= (input.getGlobalBounds().width + input.getPosition().x))
+		&& (sf::Mouse::getPosition(window).y >= input.getPosition().y && sf::Mouse::getPosition(window).y <= (input.getPosition().y + input.getGlobalBounds().height))) {
+
+		input.setColor(sf::Color(51, 51, 51, 255));
+
+		return 1;
+	}
+	else {
+		input.setColor(sf::Color(255, 255, 255, 255));
+
+		return 0;
+	}
+
+}
+
+
+
+
+
+
+
+
 
 //highlights text input boxes when moused over
-bool Blokus::HighlighBtn(sf::RectangleShape &input, sf::RenderWindow &window)
+bool Blokus::HighlighTextField(sf::RectangleShape &input, sf::RenderWindow &window)
 {
 	if ((sf::Mouse::getPosition(window).x >= input.getPosition().x && sf::Mouse::getPosition(window).x <= (input.getGlobalBounds().width + input.getPosition().x))
 		&& (sf::Mouse::getPosition(window).y >= input.getPosition().y && sf::Mouse::getPosition(window).y <= (input.getPosition().y + input.getGlobalBounds().height))) {
@@ -247,10 +359,10 @@ bool Blokus::HighlighBtn(sf::RectangleShape &input, sf::RenderWindow &window)
 TwoPlayer_Game::TwoPlayer_Game()
 {
 	
-	//test case
-	GameBoard->placePiece(10, 15, *player1, FiveL);
+	////test case
+	//GameBoard->placePiece(10, 15, *player1, FiveL);
 
-	GameBoard->placePiece(5, 10, *player2, FiveC);
+	//GameBoard->placePiece(5, 10, *player2, FiveC);
 
 	//test case
 
@@ -265,7 +377,7 @@ TwoPlayer_Game::TwoPlayer_Game()
 
 			}
 
-			placeShape(*player1);
+			placeShape(*player1, FiveC);
 
 			GameWindow->clear(sf::Color::Color(214, 214, 214, 255));
 

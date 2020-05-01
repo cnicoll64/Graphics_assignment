@@ -39,7 +39,7 @@ int Board::validCornerY(color c)
 	return -1;
 }
 
-bool Board::placePiece(int xCenter, int yCenter, Player p, shape s) // pieces are placed first at their center. if there is no clear center, it will
+bool Board::placePiece(int xCenter, int yCenter, Player &p, shape s) // pieces are placed first at their center. if there is no clear center, it will
 {															 // be top left of center
 	if (p.hasPiece(s))
 	{
@@ -774,7 +774,7 @@ bool Board::placePiece(int xCenter, int yCenter, Player p, shape s) // pieces ar
 			fillTile(xCenter, yCenter, p);
 				switch (p.getShape(17).getOrientation())
 				{
-				case North:
+				case North: //works
 					fillTile(xCenter, yCenter + 1, p);
 					fillTile(xCenter + 1, yCenter + 1, p);
 					fillTile(xCenter, yCenter - 1, p);

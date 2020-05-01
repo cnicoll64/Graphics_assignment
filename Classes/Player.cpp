@@ -20,6 +20,12 @@ BlokusShape Player::getShape(int shapeNum)
 	return pieces[shapeNum];
 }
 
+//finds peice in array and sets its rotation
+void Player::setShapeRotation(int shapeNum, bool clockwise)
+{
+	pieces[shapeNum].rotate(clockwise);
+}
+
 int Player::shapeNum()
 {
 	int n = 0;

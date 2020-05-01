@@ -59,16 +59,23 @@ bool BlokusShape::rotate(bool clockwise)
 			orientation = (direction)(orientation + 1); // rotate clockwise
 			return true; //exit
 		}
-		orientation = North; // else set equal to North
-		return true; //exit
+		else {
+			orientation = North; // else set equal to North
+			return true; //exit
+		}
+		
 	}
-	if ((int)getOrientation() > 1) // if  orientation is not North
-	{
-		orientation = (direction)(orientation - 1);// rotate counterclockwise
-		return true; //exit
+	else {
+		if ((int)getOrientation() > 0) // if  orientation is not North
+		{
+			orientation = (direction)(orientation - 1);// rotate counterclockwise
+			return true; //exit
+		}
+		else {
+			orientation = West; // else set equal to West
+			return true; //exit
+		}	
 	}
-	orientation = West; // else set equal to West
-	return true; //exit
 }
 
 bool BlokusShape::placed()

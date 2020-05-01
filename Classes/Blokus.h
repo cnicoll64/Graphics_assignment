@@ -13,14 +13,15 @@ public:
 
 	//graphics functions
 	void printGrid();
-	void placeShape(Player& input);
+	void placeShape(Player& input, shape currentpeice);
+	bool highlightTexture(sf::Sprite& input, sf::RenderWindow &window);
 
 	//pure virtual declaration
 	virtual void playGame() = 0;
 
 
 protected:
-	bool HighlighBtn(sf::RectangleShape& input, sf::RenderWindow& window);
+	bool HighlighTextField(sf::RectangleShape& input, sf::RenderWindow& window);
 	Board *GameBoard;
 	Player* player1;
 	Player* player2;
@@ -28,9 +29,11 @@ protected:
 	//graphic stuff below
 	sf::RenderWindow* GameWindow;
 	sf::Font* gameFont;
+	sf::Texture* placebtn, * endbtn, *CW, *CCW;
 
-	sf::Text* text;
+	sf::Text* text, *rotation;
 	sf::RectangleShape* square;
+	sf::Sprite* Place_Shape, * EndTurn, *ROT_CW, *ROT_CCW;
 
 	//add sprites and textures here
 };

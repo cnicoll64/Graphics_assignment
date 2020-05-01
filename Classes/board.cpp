@@ -1752,7 +1752,7 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
 				!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
 				{
 					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
 						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
@@ -3616,16 +3616,16 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 							(getGameTile(xCenter - 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
 							(getGameTile(xCenter - 2, yCenter).getPlayerColor() == p.getColor()))
 						{
-							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()))
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()))
 							{
 								return true;
 							}

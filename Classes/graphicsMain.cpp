@@ -6,8 +6,6 @@
 #include "tile.h"
 #include "board.h"
 
-int main(void)
-{
 
 	//chooseGame() member function will return either a 2, 3, or 4   - thease numbers stand for amount of users playing
 	//after chooseGame the main Game object should be redefined to work with that amount of players, the rest show be computer players
@@ -239,6 +237,3 @@ int main(void)
 		window.display();
 	}
 	
-
-	return 0;
-}

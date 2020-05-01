@@ -181,7 +181,7 @@ void menu::printRules()
 	
 	//string courtesy of www.ultraboardgames.com/blokus/game-rules.php
 	string message = "\tBlokus is a multi player game that involes squares with different colors. The game ends when all players are blocked\nfrom laying down any more of their pieces.";
-	
+
 	message.append(" This also includes any players who may have placed all of their pieces on the board.\n");
 
 	message.append("The first piece played by each player must cover a corner square. ");

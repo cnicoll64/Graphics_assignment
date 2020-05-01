@@ -11,11 +11,13 @@ class Blokus
 public:
 	Blokus();
 
+	void printGrid();
+
 	//pure virtual declaration
 	virtual void playGame() = 0;
 
 
-private:
+protected:
 	Board *GameBoard;
 	Player* player1;
 	Player* player2;
@@ -25,6 +27,7 @@ private:
 	sf::Font* gameFont;
 
 	sf::Text* text;
+	sf::RectangleShape* square;
 
 	//add sprites and textures here
 };
@@ -39,15 +42,6 @@ public:
 	TwoPlayer_Game();
 	void playGame();
 
-
-private:
-	Board* GameBoard;
-	Player* player1;
-	Player* player2;
-
-	//add AI here
-
-	sf::RenderWindow* GameWindow;
 };
 
 

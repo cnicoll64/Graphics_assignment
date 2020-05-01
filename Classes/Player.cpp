@@ -4,7 +4,7 @@
 Player::Player(color newPlayerColor)
 {
 	playerColor = newPlayerColor;
-	for (int index = 0; index > 20; ++index)
+	for (int index = 0; index < 20; ++index)
 	{
 		pieces[index].setType((shape)index);
 	}

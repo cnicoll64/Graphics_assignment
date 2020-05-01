@@ -973,16 +973,300 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 		-No tiles may be outside the 2D array
 		-There must be a tile of the player's color at the corner of one of the shapes
 		-There must not be any tiles of the players color touching any of the edges of the shape
-		
+
 		If all of these conditions are met, the function returns true
 		Also, if any shapes are placed at their starting corner and the conditions are fulfilled, then this is a valid placement
 
-		EXAMPLE:
+		Template:
+
+			case Two:
+		switch (p.getShape(1).getOrientation())
+		{
+		case North:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+		}
 	*/
 	switch (s)
 	{
-	case ThreeL:
+	case One:
+		if (!getGameTile(xCenter, yCenter).isOccupied())
+		{
+			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+			{
+				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+				{
+					return true;
+				}
+				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+				{
+					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+						(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+					{
+						return true;
+					}
+				}
 
+			}
+			return false;
+		}
+		break;
+
+	case Two:
+		switch (p.getShape(1).getOrientation())
+		{
+		case North:
+			if ((!getGameTile(xCenter, yCenter).isOccupied()) && (!getGameTile(xCenter + 1, yCenter).isOccupied()))
+			{
+				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if ((!getGameTile(xCenter, yCenter).isOccupied()) && (!getGameTile(xCenter + 1, yCenter).isOccupied()))
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if ((!getGameTile(xCenter - 1, yCenter).isOccupied()) && (!getGameTile(xCenter, yCenter).isOccupied()))
+			{
+				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if ((!getGameTile(xCenter, yCenter).isOccupied()) && (!getGameTile(xCenter, yCenter - 1).isOccupied()))
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+		}
+		break;
+
+	case ThreeL:
 		switch (p.getShape(2).getOrientation())
 		{
 		case North:
@@ -991,7 +1275,7 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			{
 				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20)) //check if tiles go out of bounds
 				{
-					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) || 
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
 						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
 						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))) //check if piece is in a valid 
 					{																						  //corner
@@ -1059,11 +1343,11 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter - 1).isOccupied())
 			{
-				if ((xCenter + 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter - 1 < 20))
+				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
 				{
 					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
 						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
-						(xCenter == validCornerX(p.getColor()) && yCenter - 1== validCornerY(p.getColor())))
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1094,7 +1378,7 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter + 1).isOccupied())
 			{
-				if ((xCenter + 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
 				{
 					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
 						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
@@ -1127,17 +1411,3606 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 		}
 		break;
 
-		/*
-			So, upon doing the example, I learned a few things. A: this is going to be very long, as there are 20 of those left to do.
-			B: I am sorry for anyone who has to work on this. I would not have done this if I thought that anyone but me would have to work
-			on this function. C: I found out that for each orientation, you can just reverse certain x and y values. for East, reverse
-			y values. For south, reverse x and y values. For west, reverse x values. For each case, logically figure out North orientation, 
-			then reverse values accordingly for the rest of the orientations
-		*/
-			
+	case ThreeLine:
+
+		switch (p.getShape(3).getOrientation())
+		{
+		case North:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter - 1, yCenter).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter - 1, yCenter).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+		}
+		break;
+
+	case Cube:
+		switch (p.getShape(4).getOrientation())
+		{
+		case North:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter + 1, yCenter + 1).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter - 1, yCenter + 1).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter - 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter - 1, yCenter - 1).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter - 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter + 1, yCenter - 1).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+		}
+		break;
+
+	case FourT:
+		switch (p.getShape(5).getOrientation())
+		{
+		case North:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()))
+
+					{
+						if ((getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+				!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()))
+
+					{
+						if ((getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()))
+
+					{
+						if ((getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()))
+
+					{
+						if ((getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+		}
+		break;
+
+	case FourL:
+		if (!p.getShape(6).isFlipped())
+		{
+			switch (p.getShape(6).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied())
+				{
+					if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter + 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 3, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 2 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 3).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied())
+				{
+					if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 3, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 2 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 3).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		else
+		{
+			switch (p.getShape(6).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 2 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 3, yCenter + 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 3, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 2 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 3).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied())
+				{
+					if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 3, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 2 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 3).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		break;
+
+	case FourS: // //
+		if (!p.getShape(8).isFlipped())
+		{
+			switch (p.getShape(8).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter - 1, yCenter + 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter - 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter + 1, yCenter - 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter + 1).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		else
+		{
+			switch (p.getShape(8).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter + 1, yCenter + 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter + 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) || // // //
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter - 1, yCenter - 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter - 1).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) || // // //
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		break;
+
+	case FiveL:
+		if (!p.getShape(9).isFlipped())
+		{
+			switch (p.getShape(9).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied() &&
+					!getGameTile(xCenter + 3, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 3 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 4, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 4, yCenter + 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 3, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 4, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 3, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied() &&
+					!getGameTile(xCenter, yCenter + 3).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 3 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 3 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 4).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 4).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 4).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied() &&
+					!getGameTile(xCenter - 3, yCenter).isOccupied())
+				{
+					if ((xCenter - 3 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 4, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 4, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 3, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 4, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 3, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied() &&
+					!getGameTile(xCenter, yCenter - 3).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 3 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 3 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 4).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 4).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 4).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		else
+		{
+			switch (p.getShape(1).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied() &&
+					!getGameTile(xCenter - 3, yCenter).isOccupied())
+				{
+					if ((xCenter - 3 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 4, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 4, yCenter + 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 3, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 4, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 3, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied() &&
+					!getGameTile(xCenter, yCenter - 3).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 3 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 3 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 4).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 4).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 4).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied() &&
+					!getGameTile(xCenter + 3, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 3 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 4, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 4, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 3, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 4, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 3, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied() &&
+					!getGameTile(xCenter, yCenter + 3).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 3 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 3 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 4).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 4).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 4).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		break;
+
+	case FiveT:
+		switch (p.getShape(10).getOrientation())
+		{
+		case North:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied() &&
+				!getGameTile(xCenter + 1, yCenter).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 2 > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 3).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 3).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 3).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+				!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter + 1).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter + 2 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 3, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied() &&
+				!getGameTile(xCenter - 1, yCenter).isOccupied())
+			{
+				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 2 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 3).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 3).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 3).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+				!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied())
+			{
+				if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+		}
+		break;
+
+	case FiveEvenL:
+		switch (p.getShape(11).getOrientation())
+		{
+		case North:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied() &&
+				!getGameTile(xCenter + 1, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter + 2 < 20) && (yCenter - 2 > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 3).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 3).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 3).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 3, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied() &&
+				!getGameTile(xCenter + 1, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter + 2 < 20) && (yCenter > 0 && yCenter + 2 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
+						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 3).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 3).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 3).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 3, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied() &&
+				!getGameTile(xCenter - 1, yCenter).isOccupied())
+			{
+				if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 2 < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter + 3).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 3).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 3).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied() &&
+				!getGameTile(xCenter - 1, yCenter).isOccupied())
+			{
+				if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter - 2 > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
+						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 3).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 3).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 3).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		}
+		break;
+
+	case FiveLongS:
+		if (!p.getShape(12).isFlipped())
+		{
+			switch (p.getShape(12).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter + 2, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter + 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter + 2 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 3, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter, yCenter + 2).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter - 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 2 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter - 2, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter - 1).isOccupied())
+				{
+					if ((xCenter - 2 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 3, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter, yCenter - 2).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter + 1).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 2 > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		else
+		{
+			switch (p.getShape(12).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter - 2, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter + 1).isOccupied())
+				{
+					if ((xCenter - 2 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 3, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter, yCenter - 2).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter + 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 2 > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter + 2, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter - 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter + 2 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 3, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 3, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 3, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter, yCenter + 2).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter - 1).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 2 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter + 3).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 3).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		break;
+
+	case FiveZ:
+		if (p.getShape(13).isFlipped())
+		{
+			switch (p.getShape(13).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter - 1).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter + 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter - 1).isOccupied())
+				{
+					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
+							xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		else
+		{
+			switch (p.getShape(1).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		break;
+
+	case FiveLine:
+		switch (p.getShape(1).getOrientation())
+		{
+		case North:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+		}
+		break;
+
+	case FiveCubeNub:
+		if (p.getShape(15).isFlipped())
+		{
+			switch (p.getShape(1).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		else
+		{
+			switch (p.getShape(1).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		break;
+
+	case FiveSnake:
+		switch (p.getShape(1).getOrientation())
+		{
+		case North:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+		}
+		break;
+
+	case FiveC:
+		switch (p.getShape(1).getOrientation())
+		{
+		case North:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case East:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case South:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+
+		case West:
+			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+				!getGameTile(xCenter, yCenter).isOccupied())
+			{
+				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				{
+					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					{
+						return true;
+					}
+
+					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+					{
+						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
+		}
+		break;
+
+	case FiveSNub:
+		if (p.getShape(18).isFlipped())
+		{
+			switch (p.getShape(1).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		else
+		{
+			switch (p.getShape(1).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		break;
+
+	case FiveCross:
+
+		break;
+
+	case FiveLineNub:
+		if (!p.getShape(20).isFlipped())
+		{
+			switch (p.getShape(1).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		else
+		{
+			switch (p.getShape(1).getOrientation())
+			{
+			case North:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case East:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case South:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+
+			case West:
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+					!getGameTile(xCenter, yCenter).isOccupied())
+				{
+					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					{
+						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						{
+							return true;
+						}
+
+						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						{
+							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+							{
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+				break;
+			}
+		}
+		break;
 	}
 
-	return false;
+	/*
+		So, upon doing the example, I learned a few things. A: this is going to be very long, as there are 20 of those left to do.
+		B: I am sorry for anyone who has to work on this. I would not have done this if I thought that anyone but me would have to work
+		on this function. C: I found out that for each orientation, you can just reverse certain x and y values. for East, reverse
+		y values. For south, reverse x and y values. For west, reverse x values. For each case, logically figure out North orientation,
+		then reverse values accordingly for the rest of the orientations
+	*/
 }
 int Board::redTiles()
 {

@@ -6,7 +6,7 @@
 enum shape{One, Two, ThreeL, ThreeLine, Cube, FourT, FourLine, FourL, FourS, FiveL, FiveT, FiveEvenL, FiveLongS, FiveZ, FiveLine,
 	FiveCubeNub, FiveSnake, FiveC, FiveSNub, FiveCross, FiveLineNub};
 
-enum direction{North, East, South, West}; // north orientation is defined by blokusOrientationReference.png
+enum direction{North, East, South, West}; // north orientation is defined by NothTileReference.png
 
 //class Tile                 -class used for pointer-to-tiles method
 //{

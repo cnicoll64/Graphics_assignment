@@ -2,10 +2,10 @@
 #include "menu.h"
 #include "Blokus.h"
 #include "piece.h"
+#include "Scoreboard.h"
 
 int main(void)
 {
-
 	//chooseGame() member function will return either a 2, 3, or 4   - thease numbers stand for amount of users playing
 	//after chooseGame the main Game object should be redefined to work with that amount of players, the rest show be computer players
 	//ie if only two players are playing two computers should be generated
@@ -224,7 +224,7 @@ int main(void)
 	*/
 
 		//}
-	
+
 
 	return 0;
 }

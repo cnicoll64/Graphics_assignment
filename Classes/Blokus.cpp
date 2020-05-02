@@ -375,7 +375,7 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 			if (isNum(x) && isNum(y)) {
 
 				//checks if peice works, if so places shape
-				if (GameBoard->validate(stoi(x) +1, stoi(y)+1, input, currentpeice)) {
+				if (GameBoard->validate(stoi(x), stoi(y), input, currentpeice)) {
 
 					Place_Shape->setPosition(sf::Vector2f((500 - Place_Shape->getGlobalBounds().width) / 2, 550));
 					window.draw(*Place_Shape);
@@ -387,7 +387,7 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 							flag = false;
 
 							//add peice validation
-							GameBoard->placePiece(stoi(x) + 1, stoi(y) + 1, input, currentpeice);
+							GameBoard->placePiece(stoi(x) - 1, stoi(y) - 1, input, currentpeice);
 
 
 						}

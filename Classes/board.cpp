@@ -3,8 +3,8 @@
 
 bool Board::fillTile(int x, int y, Player p)
 {
-	game[x][y].setOccupied();
-	game[x][y].setPlayerColor(p.getColor());
+	game[y][x].setOccupied();
+	game[y][x].setPlayerColor(p.getColor());
 	return true;
 }
 
@@ -17,11 +17,11 @@ int Board::validCornerX(color c) // valid corner functions take a color and retu
 {
 	if (c == Red || c == Green)
 	{
-		return 0;
+		return 1;
 	}
 	if (c == Blue || c == Yellow)
 	{
-		return 19;
+		return 20;
 	}
 	return -1;
 }
@@ -30,11 +30,11 @@ int Board::validCornerY(color c)
 {
 	if (c == Red || c == Blue)
 	{
-		return 0;
+		return 1;
 	}
 	if (c == Green || c == Yellow)
 	{
-		return 19;
+		return 20;
 	}
 	return -1;
 }
@@ -1112,7 +1112,7 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 	case One:
 		if (!getGameTile(xCenter, yCenter).isOccupied())
 		{
-			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+			if ((xCenter > 0 && xCenter < 21) && (yCenter > 0 && yCenter < 21))
 			{
 				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
 				{
@@ -1143,10 +1143,10 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 		case North:
 			if ((!getGameTile(xCenter, yCenter).isOccupied()) && (!getGameTile(xCenter + 1, yCenter).isOccupied()))
 			{
-				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter < 20))
+				if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1174,10 +1174,10 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 		case East:
 			if ((!getGameTile(xCenter, yCenter).isOccupied()) && (!getGameTile(xCenter + 1, yCenter).isOccupied()))
 			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				if ((xCenter > 0 && xCenter < 21) && (yCenter > 0 && yCenter + 1 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1205,10 +1205,10 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 		case South:
 			if ((!getGameTile(xCenter - 1, yCenter).isOccupied()) && (!getGameTile(xCenter, yCenter).isOccupied()))
 			{
-				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+				if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1236,10 +1236,10 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 		case West:
 			if ((!getGameTile(xCenter, yCenter).isOccupied()) && (!getGameTile(xCenter, yCenter - 1).isOccupied()))
 			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				if ((xCenter > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1273,7 +1273,7 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter + 1).isOccupied()) // check if spaces are occupied
 			{
-				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20)) //check if tiles go out of bounds
+				if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter > 0 && yCenter + 1 < 21)) //check if tiles go out of bounds
 				{
 					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
 						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
@@ -1308,7 +1308,7 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter - 1).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter < 21))
 				{
 					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
 						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
@@ -1343,7 +1343,7 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter - 1).isOccupied())
 			{
-				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter > 0 && yCenter + 1 < 21))
 				{
 					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
 						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
@@ -1378,7 +1378,7 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter + 1).isOccupied())
 			{
-				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter + 1 < 21))
 				{
 					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
 						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
@@ -1419,11 +1419,11 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter - 1, yCenter).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter < 20))
+				if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1454,11 +1454,11 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
 				!getGameTile(xCenter, yCenter - 1).isOccupied())
 			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				if ((xCenter > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1489,11 +1489,11 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter - 1, yCenter).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter < 20))
+				if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1524,11 +1524,11 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
 				!getGameTile(xCenter, yCenter - 1).isOccupied())
 			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				if ((xCenter > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1564,12 +1564,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter + 1, yCenter + 1).isOccupied())
 			{
-				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter + 1 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1600,12 +1600,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter - 1, yCenter + 1).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter > 0 && yCenter + 1 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1636,12 +1636,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter - 1, yCenter - 1).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1672,12 +1672,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter + 1, yCenter - 1).isOccupied())
 			{
-				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1713,12 +1713,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+				if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1752,12 +1752,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
 				!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied())
 			{
-				if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1791,12 +1791,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+				if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter + 1 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1830,12 +1830,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -1868,20 +1868,20 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 		break;
 
 	case FourL:
-		if (!p.getShape(6).isFlipped())
+		if (!p.getShape(7).isFlipped())
 		{
-			switch (p.getShape(6).getOrientation())
+			switch (p.getShape(7).getOrientation())
 			{
 			case North:
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied())
 				{
-					if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					if ((xCenter - 2 > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -1914,12 +1914,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 2 > 0 && yCenter < 20))
+					if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter - 2 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -1952,12 +1952,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
 					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied())
 				{
-					if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					if ((xCenter - 2 > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -1990,12 +1990,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 2 < 20))
+					if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter > 0 && yCenter + 2 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2027,18 +2027,18 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 		}
 		else
 		{
-			switch (p.getShape(6).getOrientation())
+			switch (p.getShape(7).getOrientation())
 			{
 			case North:
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
 					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 2 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					if ((xCenter > 0 && xCenter + 2 < 21) && (yCenter - 1 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2071,12 +2071,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 2 < 20))
+					if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter + 2 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2109,12 +2109,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied())
 				{
-					if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					if ((xCenter - 2 > 0 && xCenter < 21) && (yCenter > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2147,12 +2147,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 2 > 0 && yCenter < 20))
+					if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter - 2 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2193,12 +2193,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter - 1, yCenter + 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2231,12 +2231,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter - 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2269,12 +2269,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter + 1, yCenter - 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2307,12 +2307,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
 					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter + 1).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2350,12 +2350,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter + 1, yCenter + 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2388,12 +2388,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 1, yCenter + 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) || // // //
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) || // // //
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2426,12 +2426,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter - 1, yCenter - 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2464,12 +2464,12 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
 					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter - 1).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) || // // //
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) || // // //
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2511,13 +2511,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied() &&
 					!getGameTile(xCenter + 3, yCenter).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 3 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					if ((xCenter > 0 && xCenter + 3 < 21) && (yCenter - 1 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2553,13 +2553,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied() &&
 					!getGameTile(xCenter, yCenter + 3).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 3 < 20))
+					if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter + 3 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 3 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 3 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2595,13 +2595,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied() &&
 					!getGameTile(xCenter - 3, yCenter).isOccupied())
 				{
-					if ((xCenter - 3 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					if ((xCenter - 3 > 0 && xCenter < 21) && (yCenter > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2637,13 +2637,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied() &&
 					!getGameTile(xCenter, yCenter - 3).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 3 > 0 && yCenter < 20))
+					if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter - 3 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 3 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 3 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2677,20 +2677,20 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 		}
 		else
 		{
-			switch (p.getShape(1).getOrientation())
+			switch (p.getShape(9).getOrientation())
 			{
 			case North:
 				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied() &&
 					!getGameTile(xCenter - 3, yCenter).isOccupied())
 				{
-					if ((xCenter - 3 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					if ((xCenter - 3 > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2726,13 +2726,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied() &&
 					!getGameTile(xCenter, yCenter - 3).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 3 > 0 && yCenter < 20))
+					if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter - 3 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 3 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 3 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2768,13 +2768,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied() &&
 					!getGameTile(xCenter + 3, yCenter).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 3 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					if ((xCenter > 0 && xCenter + 3 < 21) && (yCenter > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 3 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2810,13 +2810,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied() &&
 					!getGameTile(xCenter, yCenter + 3).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 3 < 20))
+					if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter > 0 && yCenter + 3 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 3 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 3 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -2858,13 +2858,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied() &&
 				!getGameTile(xCenter + 1, yCenter).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 2 > 0 && yCenter < 20))
+				if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter - 2 > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -2900,13 +2900,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				!getGameTile(xCenter + 1, yCenter).isOccupied() && !getGameTile(xCenter + 2, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter + 1).isOccupied())
 			{
-				if ((xCenter > 0 && xCenter + 2 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				if ((xCenter > 0 && xCenter + 2 < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -2942,13 +2942,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied() &&
 				!getGameTile(xCenter - 1, yCenter).isOccupied())
 			{
-				if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 2 < 20))
+				if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter + 2 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -2984,13 +2984,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				!getGameTile(xCenter - 1, yCenter).isOccupied() && !getGameTile(xCenter - 2, yCenter).isOccupied() &&
 				!getGameTile(xCenter, yCenter - 1).isOccupied())
 			{
-				if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+				if ((xCenter - 2 > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -3031,13 +3031,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied() &&
 				!getGameTile(xCenter + 1, yCenter).isOccupied())
 			{
-				if ((xCenter > 0 && xCenter + 2 < 20) && (yCenter - 2 > 0 && yCenter < 20))
+				if ((xCenter > 0 && xCenter + 2 < 21) && (yCenter - 2 > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -3073,13 +3073,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied() &&
 				!getGameTile(xCenter + 1, yCenter).isOccupied())
 			{
-				if ((xCenter > 0 && xCenter + 2 < 20) && (yCenter > 0 && yCenter + 2 < 20))
+				if ((xCenter > 0 && xCenter + 2 < 21) && (yCenter > 0 && yCenter + 2 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
-						xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor())) ||
+						(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -3115,13 +3115,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				!getGameTile(xCenter, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter + 2).isOccupied() &&
 				!getGameTile(xCenter - 1, yCenter).isOccupied())
 			{
-				if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter > 0 && yCenter + 2 < 20))
+				if ((xCenter - 2 > 0 && xCenter < 21) && (yCenter > 0 && yCenter + 2 < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -3157,13 +3157,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				!getGameTile(xCenter, yCenter - 1).isOccupied() && !getGameTile(xCenter, yCenter - 2).isOccupied() &&
 				!getGameTile(xCenter - 1, yCenter).isOccupied())
 			{
-				if ((xCenter - 2 > 0 && xCenter < 20) && (yCenter - 2 > 0 && yCenter < 20))
+				if ((xCenter - 2 > 0 && xCenter < 21) && (yCenter - 2 > 0 && yCenter < 21))
 				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
-						xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+					if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+						(xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor())) ||
+						(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())))
 					{
 						return true;
 					}
@@ -3207,13 +3207,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter + 2, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter + 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter + 2 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					if ((xCenter - 1 > 0 && xCenter + 2 < 21) && (yCenter > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -3249,13 +3249,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter, yCenter + 2).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter - 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 1 > 0 && yCenter + 2 < 20))
+					if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter - 1 > 0 && yCenter + 2 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -3291,13 +3291,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter - 2, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
 					!getGameTile(xCenter + 1, yCenter - 1).isOccupied())
 				{
-					if ((xCenter - 2 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					if ((xCenter - 2 > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -3333,13 +3333,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter, yCenter - 2).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter + 1, yCenter + 1).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 2 > 0 && yCenter + 1 < 20))
+					if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter - 2 > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -3380,13 +3380,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter - 2, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
 					!getGameTile(xCenter + 1, yCenter + 1).isOccupied())
 				{
-					if ((xCenter - 2 > 0 && xCenter + 1 < 20) && (yCenter > 0 && yCenter + 1 < 20))
+					if ((xCenter - 2 > 0 && xCenter + 1 < 21) && (yCenter > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -3422,13 +3422,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter, yCenter - 2).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter + 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter < 20) && (yCenter - 2 > 0 && yCenter + 1 < 20))
+					if ((xCenter - 1 > 0 && xCenter < 21) && (yCenter - 2 > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 2 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -3464,13 +3464,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter + 2, yCenter).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter - 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter + 2 < 20) && (yCenter - 1 > 0 && yCenter < 20))
+					if ((xCenter - 1 > 0 && xCenter + 2 < 21) && (yCenter - 1 > 0 && yCenter < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 2 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -3506,13 +3506,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter, yCenter + 2).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter + 1, yCenter - 1).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 2 < 20))
+					if ((xCenter > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter + 2 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 2 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -3556,13 +3556,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter + 1, yCenter - 1).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter + 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -3598,13 +3598,13 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 					!getGameTile(xCenter + 1, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
 					!getGameTile(xCenter - 1, yCenter - 1).isOccupied())
 				{
-					if ((xCenter - 1 > 0 && xCenter + 1 < 20) && (yCenter - 1 > 0 && yCenter + 1 < 20))
+					if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor()) ||
-							xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
@@ -3636,27 +3636,38 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				break;
 
 			case South:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter + 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter - 1).isOccupied() && !getGameTile(xCenter - 1, yCenter).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter + 1).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
 
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						if ((getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter, yCenter + 2).getPlayerColor() == p.getColor()))
 						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+							if ((getGameTile(xCenter, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
 								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+								(getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 2, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() != p.getColor()))
 							{
 								return true;
 							}
@@ -3667,27 +3678,38 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 				break;
 
 			case West:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
+				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter + 1).isOccupied() &&
+					!getGameTile(xCenter + 1, yCenter + 1).isOccupied() && !getGameTile(xCenter, yCenter - 1).isOccupied() &&
+					!getGameTile(xCenter - 1, yCenter - 1).isOccupied())
 				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+					if ((xCenter - 1 > 0 && xCenter + 1 < 21) && (yCenter - 1 > 0 && yCenter + 1 < 21))
 					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+						if ((xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter + 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())) ||
+							(xCenter == validCornerX(p.getColor()) && yCenter - 1 == validCornerY(p.getColor())) ||
+							(xCenter - 1 == validCornerX(p.getColor()) && yCenter + 1 == validCornerY(p.getColor())))
 						{
 							return true;
 						}
 
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+						if ((getGameTile(xCenter - 1, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter + 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 2, yCenter).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter + 1, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter - 2).getPlayerColor() == p.getColor()) ||
+							(getGameTile(xCenter - 2, yCenter).getPlayerColor() == p.getColor()))
 						{
 							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 2, yCenter + 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter + 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() != p.getColor()) ||
 								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+								(getGameTile(xCenter - 2, yCenter - 1).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter - 1, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter, yCenter - 2).getPlayerColor() != p.getColor()) ||
+								(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() != p.getColor()))
 							{
 								return true;
 							}
@@ -3829,1179 +3851,1179 @@ bool Board::validate(int xCenter, int yCenter, Player p, shape s)
 		}
 		break;
 
-	case FiveLine:
-		switch (p.getShape(1).getOrientation())
-		{
-		case North:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-
-		case East:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-
-		case South:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-
-		case West:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-		}
-		break;
-
-	case FiveCubeNub:
-		if (p.getShape(15).isFlipped())
-		{
-			switch (p.getShape(1).getOrientation())
-			{
-			case North:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case East:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case South:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case West:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-			}
-		}
-		else
-		{
-			switch (p.getShape(1).getOrientation())
-			{
-			case North:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case East:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case South:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case West:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-			}
-		}
-		break;
-
-	case FiveSnake:
-		switch (p.getShape(1).getOrientation())
-		{
-		case North:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-
-		case East:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-
-		case South:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-
-		case West:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-		}
-		break;
-
-	case FiveC:
-		switch (p.getShape(1).getOrientation())
-		{
-		case North:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-
-		case East:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-
-		case South:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-
-		case West:
-			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-				!getGameTile(xCenter, yCenter).isOccupied())
-			{
-				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-				{
-					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-					{
-						return true;
-					}
-
-					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-					{
-						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-			break;
-		}
-		break;
-
-	case FiveSNub:
-		if (p.getShape(18).isFlipped())
-		{
-			switch (p.getShape(1).getOrientation())
-			{
-			case North:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case East:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case South:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case West:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-			}
-		}
-		else
-		{
-			switch (p.getShape(1).getOrientation())
-			{
-			case North:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case East:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case South:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case West:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-			}
-		}
-		break;
-
-	case FiveCross:
-
-		break;
-
-	case FiveLineNub:
-		if (!p.getShape(20).isFlipped())
-		{
-			switch (p.getShape(1).getOrientation())
-			{
-			case North:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case East:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case South:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case West:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-			}
-		}
-		else
-		{
-			switch (p.getShape(1).getOrientation())
-			{
-			case North:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case East:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case South:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-
-			case West:
-				if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
-					!getGameTile(xCenter, yCenter).isOccupied())
-				{
-					if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
-					{
-						if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
-							xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
-						{
-							return true;
-						}
-
-						if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
-							(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
-						{
-							if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
-								(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
-							{
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-				break;
-			}
-		}
-		break;
+	//case FiveLine:
+	//	switch (p.getShape(1).getOrientation())
+	//	{
+	//	case North:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+
+	//	case East:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+
+	//	case South:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+
+	//	case West:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+	//	}
+	//	break;
+
+	//case FiveCubeNub:
+	//	if (p.getShape(15).isFlipped())
+	//	{
+	//		switch (p.getShape(1).getOrientation())
+	//		{
+	//		case North:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case East:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case South:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case West:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		switch (p.getShape(1).getOrientation())
+	//		{
+	//		case North:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case East:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case South:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case West:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+	//		}
+	//	}
+	//	break;
+
+	//case FiveSnake:
+	//	switch (p.getShape(1).getOrientation())
+	//	{
+	//	case North:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+
+	//	case East:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+
+	//	case South:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+
+	//	case West:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+	//	}
+	//	break;
+
+	//case FiveC:
+	//	switch (p.getShape(1).getOrientation())
+	//	{
+	//	case North:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+
+	//	case East:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+
+	//	case South:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+
+	//	case West:
+	//		if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//			!getGameTile(xCenter, yCenter).isOccupied())
+	//		{
+	//			if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//			{
+	//				if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//					xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//				{
+	//					return true;
+	//				}
+
+	//				if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//					(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//				{
+	//					if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//						(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						return true;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		return false;
+	//		break;
+	//	}
+	//	break;
+
+	//case FiveSNub:
+	//	if (p.getShape(18).isFlipped())
+	//	{
+	//		switch (p.getShape(1).getOrientation())
+	//		{
+	//		case North:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case East:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case South:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case West:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		switch (p.getShape(1).getOrientation())
+	//		{
+	//		case North:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case East:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case South:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case West:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+	//		}
+	//	}
+	//	break;
+
+	//case FiveCross:
+
+	//	break;
+
+	//case FiveLineNub:
+	//	if (!p.getShape(20).isFlipped())
+	//	{
+	//		switch (p.getShape(1).getOrientation())
+	//		{
+	//		case North:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case East:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case South:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case West:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		switch (p.getShape(1).getOrientation())
+	//		{
+	//		case North:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case East:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case South:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+
+	//		case West:
+	//			if (!getGameTile(xCenter, yCenter).isOccupied() && !getGameTile(xCenter, yCenter).isOccupied() &&
+	//				!getGameTile(xCenter, yCenter).isOccupied())
+	//			{
+	//				if ((xCenter > 0 && xCenter < 20) && (yCenter > 0 && yCenter < 20))
+	//				{
+	//					if (xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()) ||
+	//						xCenter == validCornerX(p.getColor()) && yCenter == validCornerY(p.getColor()))
+	//					{
+	//						return true;
+	//					}
+
+	//					if ((getGameTile(xCenter + 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter + 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter + 1, yCenter - 1).getPlayerColor() == p.getColor()) ||
+	//						(getGameTile(xCenter - 1, yCenter - 1).getPlayerColor() == p.getColor()))
+	//					{
+	//						if ((getGameTile(xCenter + 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter - 1, yCenter).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter + 1).getPlayerColor() != p.getColor()) ||
+	//							(getGameTile(xCenter, yCenter - 1).getPlayerColor() == p.getColor()))
+	//						{
+	//							return true;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			return false;
+	//			break;
+	//		}
+	//	}
+	//	break;
 	}
 
 	/*

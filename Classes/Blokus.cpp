@@ -522,6 +522,9 @@ TwoPlayer_Game::TwoPlayer_Game()
 			drawPieces(*player1, spriteArray, *GameWindow);
 
 			GameWindow->display();
+
+			////// SCOREBOARD //////			Scoreboard score;			int was_shape_played_p1 = 0;			int was_shape_played_p2 = 0;			int p1 = player1->shapeNum();			int p2 = player2->shapeNum();			if (p1_check != p1)			{				was_shape_played_p1 = 1;			}			if (p2_check != p2)			{				was_shape_played_p2 = 1;			}			score.Scoreboard_update(was_shape_played_p1, *player1, ThreeL);			score.Scoreboard_update(was_shape_played_p2, *player2, ThreeL);			//score.Scoreboard_update(1, *player3, ThreeL);			//score.Scoreboard_update(0, *player4, ThreeL);			score.Scoreboard_display();
+
 		}
 	}
 }

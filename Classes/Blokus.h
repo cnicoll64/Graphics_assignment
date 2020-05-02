@@ -4,6 +4,7 @@
 #include "std.h"
 #include "Classes/board.h"
 #include "Classes/tile.h"
+#include "Scoreboard.h"
 
 //Pure Virtual Game driver object
 class Blokus

@@ -35,22 +35,126 @@ Blokus::Blokus()
 	endbtn = new sf::Texture;
 	CW = new sf::Texture;
 	CCW = new sf::Texture;
+	One_T = new sf::Texture;
+	Two_T = new sf::Texture;
+	Three_T = new sf::Texture;
+	Three_Line_T = new sf::Texture;
+	Four_Line_T = new sf::Texture;
+	Four_Square_T = new sf::Texture;
+	Four_L_T = new sf::Texture;
+	Four_T_T = new sf::Texture;
+	Four_Z_T = new sf::Texture;
+	Five_Straight_T = new sf::Texture;
+	Five_L_T = new sf::Texture;
+	Five_S_T = new sf::Texture;
+	Five_T_T = new sf::Texture;
+	Five_T_Peg_T = new sf::Texture;
+	Five_Z_T = new sf::Texture;
+	Five_Square_peg_T = new sf::Texture;
+	Five_Cross_Long_T = new sf::Texture;
+	Five_C_T = new sf::Texture;
+	Five_Bat_T = new sf::Texture;
+	Five_Plus_T = new sf::Texture;
+	Five_Corner_T = new sf::Texture;
 	EndTurn = new sf::Sprite;
 	Place_Shape = new sf::Sprite;
 	ROT_CW = new sf::Sprite;
 	ROT_CCW = new sf::Sprite;
+	One = new sf::Sprite;
+	Two = new sf::Sprite;
+	Three = new sf::Sprite;
+	Three_Line = new sf::Sprite;
+	Four_Line = new sf::Sprite;
+	Four_Square = new sf::Sprite;
+	Four_L = new sf::Sprite;
+	Four_T = new sf::Sprite;
+	Four_Z = new sf::Sprite;
+	Five_Straight = new sf::Sprite;
+	Five_L = new sf::Sprite;
+	Five_S = new sf::Sprite;
+	Five_T = new sf::Sprite;
+	Five_T_Peg = new sf::Sprite;
+	Five_Z = new sf::Sprite;
+	Five_Square_peg = new sf::Sprite;
+	Five_Cross_Long = new sf::Sprite;
+	Five_C = new sf::Sprite;
+	Five_Bat = new sf::Sprite;
+	Five_Plus = new sf::Sprite;
+	Five_Corner = new sf::Sprite;
 
 	//init sprites for place menu
 	if (!(placebtn->loadFromFile("Place.png")));
 	if (!(endbtn->loadFromFile("EndTurn.png")));
 	if (!(CW->loadFromFile("CW.png")));
 	if (!(CCW->loadFromFile("CCW.png")));
-
+	if (!(One_T->loadFromFile("One.png")));
+	if (!(Two_T->loadFromFile("Two.png")));
+	if (!(Three_T->loadFromFile("Three.png")));
+	if (!(Three_Line_T->loadFromFile("Three_Line.png")));
+	if (!(Four_Line_T->loadFromFile("Four_Line.png")));
+	if (!(Four_Square_T->loadFromFile("Four_Square.png")));
+	if (!(Four_L_T->loadFromFile("Four_L.png")));
+	if (!(Four_T_T->loadFromFile("Four_T.png")));
+	if (!(Four_Z_T->loadFromFile("Four_Z.png")));
+	if (!(Five_Straight_T->loadFromFile("Five_Straight.png")));
+	if (!(Five_L_T->loadFromFile("Five_L.png")));
+	if (!(Five_S_T->loadFromFile("Five_S.png")));
+	if (!(Five_T_T->loadFromFile("Five_T.png")));
+	if (!(Five_T_Peg_T->loadFromFile("Five_T_Peg.png")));
+	if (!(Five_Z_T->loadFromFile("Five_Z.png")));
+	if (!(Five_Square_peg_T->loadFromFile("Five_Square_peg.png")));
+	if (!(Five_Cross_Long_T->loadFromFile("Five_Cross_Long.png")));
+	if (!(Five_C_T->loadFromFile("Five_C.png")));
+	if (!(Five_Bat_T->loadFromFile("Five_Bat.png")));
+	if (!(Five_Plus_T->loadFromFile("Five_Plus.png")));
+	if (!(Five_Corner_T->loadFromFile("Five_Corner.png")));
 
 	EndTurn->setTexture(*endbtn);
 	Place_Shape->setTexture(*placebtn);
 	ROT_CW->setTexture(*CW);
 	ROT_CCW->setTexture(*CCW);
+	One->setTexture(*One_T);
+	spriteArray[0] = One;
+	Two->setTexture(*Two_T);
+	spriteArray[1] = Two;
+	Three->setTexture(*Three_T);
+	spriteArray[2] = Three;
+	Three_Line->setTexture(*Three_Line_T);
+	spriteArray[3] = Three_Line;
+	Four_Line->setTexture(*Four_Line_T);
+	spriteArray[4] = Four_Line;
+	Four_Square->setTexture(*Four_Square_T);
+	spriteArray[5] = Four_Square;
+	Four_L->setTexture(*Four_L_T);
+	spriteArray[6] = Four_L;
+	Four_T->setTexture(*Four_T_T);
+	spriteArray[7] = Four_T;
+	Four_Z->setTexture(*Four_Z_T);
+	spriteArray[8] = Four_Z;
+	Five_Straight->setTexture(*Five_Straight_T);
+	spriteArray[9] = Five_Straight;
+	Five_L->setTexture(*Five_L_T);
+	spriteArray[10] = Five_L;
+	Five_S->setTexture(*Five_S_T);
+	spriteArray[11] = Five_S;
+	Five_T->setTexture(*Five_T_T);
+	spriteArray[12] = Five_T;
+	Five_T_Peg->setTexture(*Five_T_Peg_T);
+	spriteArray[13] = Five_T_Peg;
+	Five_Z->setTexture(*Five_Z_T);
+	spriteArray[14] = Five_Z;
+	Five_Square_Peg->setTexture(*Five_Square_peg_T);
+	spriteArray[15] = Five_Square_Peg;
+	Five_Cross_Long->setTexture(*Five_Cross_Long_T);
+	spriteArray[16] = Five_Cross_Long;
+	Five_C->setTexture(*Five_C_T);
+	spriteArray[17] = Five_C;
+	Five_Bat->setTexture(*Five_Bat_T);
+	spriteArray[18] = Five_Bat;
+	Five_Plus->setTexture(*Five_Plus_T);
+	spriteArray[19] = Five_Plus;
+	Five_Corner->setTexture(*Five_Corner_T);
+	spriteArray[20] = Five_Corner;
 
 	square = nullptr;
 
@@ -198,7 +302,7 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 			UserText_x.setString(x);
 			UserText_y.setString(y);
 
-			//gets coordinates via text - for x text block
+			//gets coordinates via text
 			if (HighlighTextField(field1, window)) {
 				
 				UserText_x.setFillColor(sf::Color::White);
@@ -207,16 +311,8 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 					userInput_x += event->text.unicode;
 					UserText_x.setString(userInput_x);
 					x = userInput_x.toAnsiString();
-
-					//allows user to delete things in text block
-					if (event->text.unicode == '\b') {
-						userInput_x = " ";
-						x = userInput_x.toAnsiString();
-					}
 				}
-
-				
-			} ///for y textblock
+			}
 			else if (HighlighTextField(field2, window)) {
 
 				UserText_y.setFillColor(sf::Color::White);
@@ -225,12 +321,6 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 					userInput_y += event->text.unicode;
 					UserText_y.setString(userInput_x);
 					y = userInput_y.toAnsiString();
-
-					//allows user to delete in text block
-					if (event->text.unicode == '\b') {
-						userInput_y = " ";
-						y = userInput_y.toAnsiString();
-					}
 				}
 			}
 
@@ -268,13 +358,12 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 			}
 			
 			window.clear(sf::Color::Color(214, 214, 214, 255));
-			
 
 			//prevents some non integer inputs
 			if (isNum(x) && isNum(y)) {
 
 				//checks if peice works, if so places shape
-				if (GameBoard->validate(stoi(y), stoi(x), input, currentpeice)) {
+				if (GameBoard->validate(stoi(x) +1, stoi(y)+1, input, currentpeice)) {
 
 					Place_Shape->setPosition(sf::Vector2f((500 - Place_Shape->getGlobalBounds().width) / 2, 550));
 					window.draw(*Place_Shape);
@@ -286,7 +375,7 @@ void Blokus::placeShape(Player& input, shape currentpeice)
 							flag = false;
 
 							//add peice validation
-							GameBoard->placePiece(stoi(y), stoi(x), input, currentpeice);
+							GameBoard->placePiece(stoi(x) + 1, stoi(y) + 1, input, currentpeice);
 
 
 						}
@@ -342,6 +431,56 @@ bool Blokus::highlightTexture(sf::Sprite& input, sf::RenderWindow &window)
 
 }
 
+void drawBoard(Board& gameBoard)
+{
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			tile.setPosition((i * size) + 20, (j * size) + 20);
+			Tile* temp = gameBoard->getGameTile(i, j);
+			tile.setFillColor(temp->getPlayerColor);
+
+			/*switch (temp->getPlayerColor())
+			{
+			case sf::Color::Red:
+				tile.setFillColor(sf::Color::Red);
+				break;
+			case sf::Color::Blue:
+				tile.setFillColor(sf::Color::Blue);
+				break;
+			case sf::Color::Green:
+				tile.setFillColor(sf::Color::Green);
+				break;
+			case sf::Color::Yellow:
+				tile.setFillColor(sf::Color::Yellow);
+				break;
+			default:
+				tile.setFillColor(sf::Color::White);
+				break;
+			}*/
+			window.draw(tile);
+		}
+	}
+}
+
+void drawPieces(Player& p, sf::Sprite spriteArr[21], sf::RenderWindow& window)
+{
+	for (int i = 0; i < 21; i++)
+	{
+		BlokusShape temp = p.getShape(i);
+		//int tempArray[5][5] = piecesArray.getGeo(); <- fix me
+		if (!(temp.placed())
+		{
+			spriteArr[i]->setPosition((20 * i) + 20, 600);
+			highlightTexture(&spriteArr[i], &window);
+			window.draw(spriteArr[i]);
+			//draw each piece
+		}
+		//print each piece for the player(scaled?)
+	}
+}
+
 
 //highlights text input boxes when moused over
 bool Blokus::HighlighTextField(sf::RectangleShape &input, sf::RenderWindow &window)
@@ -395,11 +534,6 @@ TwoPlayer_Game::TwoPlayer_Game()
 
 			printGrid();
 
-			placeShape(*player2, FourS);
-
-			printGrid();
-
-			placeShape(*player2, ThreeL);
 
 			GameWindow->display();
 		}

@@ -32,7 +32,8 @@ Test conditions:
   4) In the shape placer menu, the valid function will not allow the user to make illegal moves during there turn. For example, they are      restricted to only corner placement in the beggining of the game. Additonanly, they can only place peices the touch corners in the 
      gameboard and that do not cover opponenets peices.
      
-  5)
+  5) In the place pieces function under blockus shape .cpp, the user can easily choose what piece they wish to place on the gameboard
+  by moueseing over the right sprite image. The shape Placer menu is displayed with the player's color.
   
   
   
